@@ -1,0 +1,9 @@
+TODO/
+*.pyc
+__pycache__/
+hardwarex.dll
+hardwarex.so
+libhardwarex.so
+!win32-*/hardwarex.dll
+!linux-*/hardwarex.so
+!linux-*/libhardwarex.so
