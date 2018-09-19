@@ -110,47 +110,62 @@ class NMEADATA(ctypes.Structure):
                 ("latmin", ctypes.c_double), ("longmin", ctypes.c_double),
                 ("szlatdeg", ctypes.c_char*3), ("szlongdeg", ctypes.c_char*4),
                 ("north", ctypes.c_char), ("east", ctypes.c_char),
-                ("GPS_quality_indicator", ctypes.c_int), 
+                ("GPS_quality_indicator", ctypes.c_int),
                 ("nbsat", ctypes.c_int),
-                ("hdop", ctypes.c_double), 
+                ("hdop", ctypes.c_double),
                 ("height_geoid", ctypes.c_double),
-                ("status", ctypes.c_char), 
+                ("status", ctypes.c_char),
                 ("posMode", ctypes.c_char),
                 ("sog", ctypes.c_double), ("kph", ctypes.c_double), ("cog", ctypes.c_double), ("mag_cog", ctypes.c_double),
                 ("heading", ctypes.c_double), ("deviation", ctypes.c_double), ("variation", ctypes.c_double),
-                ("dev_east", ctypes.c_char), ("var_east", ctypes.c_char), 
+                ("dev_east", ctypes.c_char), ("var_east", ctypes.c_char),
+                ("rateofturn", ctypes.c_double),
+                ("wplatdeg", ctypes.c_int), ("wplongdeg", ctypes.c_int),
+                ("wplatmin", ctypes.c_double), ("wplongmin", ctypes.c_double),
+                ("szwplatdeg", ctypes.c_char*3), ("szwplongdeg", ctypes.c_char*4),
+                ("wpnorth", ctypes.c_char), ("wpeast", ctypes.c_char),
+                ("szwpname", ctypes.c_char*64),
+                ("totalrtemsg", ctypes.c_int), ("rtemsgnb", ctypes.c_int),
+                ("rtemsgmode", ctypes.c_char),
+                ("szrtewp1name", ctypes.c_char*64),
+                ("szrtewp2name", ctypes.c_char*64),
+                ("szrtewp3name", ctypes.c_char*64),
+                ("szrtewp4name", ctypes.c_char*64),
                 ("nbsentences", ctypes.c_int),
-                ("sentence_number", ctypes.c_int), 
+                ("sentence_number", ctypes.c_int),
                 ("seqmsgid", ctypes.c_int),
-                ("AIS_channel", ctypes.c_char), 
+                ("AIS_channel", ctypes.c_char),
                 ("nbfillbits", ctypes.c_int),
                 ("roll", ctypes.c_double), ("pitch", ctypes.c_double),
-                ("salinity", ctypes.c_double), 
+                ("salinity", ctypes.c_double),
                 ("depth", ctypes.c_double),
-                ("speedofsound", ctypes.c_double), 
+                ("speedofsound", ctypes.c_double),
                 ("vx_dvl", ctypes.c_double), ("vy_dvl", ctypes.c_double), ("vz_dvl", ctypes.c_double), ("verr_dvl", ctypes.c_double), ("vt_ship", ctypes.c_double), ("vl_ship", ctypes.c_double), ("vn_ship", ctypes.c_double), ("v_east", ctypes.c_double), ("v_north", ctypes.c_double), ("v_up", ctypes.c_double), 
                 ("vstatus_dvl", ctypes.c_char), ("vstatus_ship", ctypes.c_char), ("vstatus_earth", ctypes.c_char),
                 ("d_east", ctypes.c_double), ("d_north", ctypes.c_double),
                 ("d_up", ctypes.c_double), ("rangetobottom", ctypes.c_double),
-                ("timesincelastgood", ctypes.c_double), 
+                ("timesincelastgood", ctypes.c_double),
                 ("Latitude", ctypes.c_double),
-                ("Longitude", ctypes.c_double), 
+                ("Longitude", ctypes.c_double),
                 ("Altitude", ctypes.c_double),
-                ("Altitude_AGL", ctypes.c_double), 
+                ("Altitude_AGL", ctypes.c_double),
                 ("SOG", ctypes.c_double),
-                ("COG", ctypes.c_double), 
+                ("COG", ctypes.c_double),
                 ("year", ctypes.c_int), ("month", ctypes.c_int), ("day", ctypes.c_int), ("hour", ctypes.c_int), ("minute", ctypes.c_int),
-                ("second", ctypes.c_double), 
+                ("second", ctypes.c_double),
                 ("Roll", ctypes.c_double),
-                ("Pitch", ctypes.c_double), 
+                ("Pitch", ctypes.c_double),
                 ("Heading", ctypes.c_double),
-                ("WindDir", ctypes.c_double), 
+                ("RateOfTurn", ctypes.c_double),
+                ("WindDir", ctypes.c_double),
                 ("WindSpeed", ctypes.c_double),
-                ("ApparentWindDir", ctypes.c_double), 
+                ("ApparentWindDir", ctypes.c_double),
                 ("ApparentWindSpeed", ctypes.c_double),
-                ("AIS_Latitude", ctypes.c_double), 
+                ("wpLatitude", ctypes.c_double),
+                ("wpLongitude", ctypes.c_double),
+                ("AIS_Latitude", ctypes.c_double),
                 ("AIS_Longitude", ctypes.c_double),
-                ("AIS_SOG", ctypes.c_double), 
+                ("AIS_SOG", ctypes.c_double),
                 ("AIS_COG", ctypes.c_double)]
 
 def CreateNMEAData():
@@ -339,7 +354,7 @@ def SetPWMSSC32(pSSC32, channel, pw):
 def SetAllPWMsSSC32(pSSC32, selectedchannels, pws):
     global hDll
 
-    nbchannels = 5
+    nbchannels = 32
     pselectedchannels = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
         pselectedchannels[k] = selectedchannels[k]
@@ -369,7 +384,7 @@ def DisconnectSSC32(pSSC32):
 def SetAllPWMsFromThreadSSC32(pSSC32, selectedchannels, pws):
     global hDll
 
-    nbchannels = 5
+    nbchannels = 32
     pselectedchannels = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
         pselectedchannels[k] = selectedchannels[k]
@@ -396,42 +411,42 @@ def StopThreadSSC32(pSSC32):
     function_call = hApiProto(('StopThreadSSC32x', hDll), hApiParams)
     return function_call(pSSC32)
 
-def CreateMaestro():
+def CreatePololu():
     global hDll
     hApiProto = ctypes.CFUNCTYPE(ctypes.POINTER(ctypes.c_void_p))
     hApiParams = None
-    function_call = hApiProto(('CreateMaestrox', hDll), hApiParams)
+    function_call = hApiProto(('CreatePololux', hDll), hApiParams)
     return function_call()
 
-def DestroyMaestro(pMaestro):
+def DestroyPololu(pPololu):
     global hDll
     hApiProto = ctypes.CFUNCTYPE(None, ctypes.POINTER(ctypes.c_void_p))
-    hApiParams = (1, "pMaestro", 0),
-    function_call = hApiProto(('DestroyMaestrox', hDll), hApiParams)
-    function_call(pMaestro)
+    hApiParams = (1, "pPololu", 0),
+    function_call = hApiProto(('DestroyPololux', hDll), hApiParams)
+    function_call(pPololu)
 
-def GetValueMaestro(pMaestro, channel):
+def GetValuePololu(pPololu, channel):
     global hDll
 
     pvalue = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.POINTER(ctypes.c_int))
-    hApiParams = (1, "pMaestro", 0),(1, "channel", 0),(1, "pvalue", 0),
-    function_call = hApiProto(('GetValueMaestrox', hDll), hApiParams)
-    res = function_call(pMaestro, channel, pvalue)
+    hApiParams = (1, "pPololu", 0),(1, "channel", 0),(1, "pvalue", 0),
+    function_call = hApiProto(('GetValuePololux', hDll), hApiParams)
+    res = function_call(pPololu, channel, pvalue)
     return res, pvalue[0]
 
-def SetPWMMaestro(pMaestro, channel, pw):
+def SetPWMPololu(pPololu, channel, pw):
     global hDll
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.c_int)
-    hApiParams = (1, "pMaestro", 0),(1, "channel", 0),(1, "pw", 0),
-    function_call = hApiProto(('SetPWMMaestrox', hDll), hApiParams)
-    return function_call(pMaestro, channel, pw)
+    hApiParams = (1, "pPololu", 0),(1, "channel", 0),(1, "pw", 0),
+    function_call = hApiProto(('SetPWMPololux', hDll), hApiParams)
+    return function_call(pPololu, channel, pw)
 
-def SetAllPWMsMaestro(pMaestro, selectedchannels, pws):
+def SetAllPWMsPololu(pPololu, selectedchannels, pws):
     global hDll
 
-    nbchannels = 5
+    nbchannels = 24
     pselectedchannels = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
         pselectedchannels[k] = selectedchannels[k]
@@ -440,39 +455,39 @@ def SetAllPWMsMaestro(pMaestro, selectedchannels, pws):
         ppws[k] = pws[k]
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
-    hApiParams = (1, "pMaestro", 0),(1, "pselectedchannels", 0),(1, "ppws", 0),
-    function_call = hApiProto(('SetAllPWMsMaestrox', hDll), hApiParams)
-    return function_call(pMaestro, pselectedchannels, ppws)
+    hApiParams = (1, "pPololu", 0),(1, "pselectedchannels", 0),(1, "ppws", 0),
+    function_call = hApiProto(('SetAllPWMsPololux', hDll), hApiParams)
+    return function_call(pPololu, pselectedchannels, ppws)
 
-def ConnectMaestro(pMaestro, cfgFilePath):
+def ConnectPololu(pPololu, cfgFilePath):
     global hDll
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_char_p)
-    hApiParams = (1, "pMaestro", 0),(1, "cfgFilePath", 0),
-    function_call = hApiProto(('ConnectMaestrox', hDll), hApiParams)
-    return function_call(pMaestro, cfgFilePath.encode('UTF-8'))
+    hApiParams = (1, "pPololu", 0),(1, "cfgFilePath", 0),
+    function_call = hApiProto(('ConnectPololux', hDll), hApiParams)
+    return function_call(pPololu, cfgFilePath.encode('UTF-8'))
 
-def DisconnectMaestro(pMaestro):
+def DisconnectPololu(pPololu):
     global hDll
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
-    hApiParams = (1, "pMaestro", 0),
-    function_call = hApiProto(('DisconnectMaestrox', hDll), hApiParams)
-    return function_call(pMaestro)
+    hApiParams = (1, "pPololu", 0),
+    function_call = hApiProto(('DisconnectPololux', hDll), hApiParams)
+    return function_call(pPololu)
 
-def GetValueFromThreadMaestro(pMaestro, channel):
+def GetValueFromThreadPololu(pPololu, channel):
     global hDll
 
     pvalue = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.POINTER(ctypes.c_int))
-    hApiParams = (1, "pMaestro", 0),(1, "channel", 0),(1, "pvalue", 0),
-    function_call = hApiProto(('GetValueFromThreadMaestrox', hDll), hApiParams)
-    res = function_call(pMaestro, channel, pvalue)
+    hApiParams = (1, "pPololu", 0),(1, "channel", 0),(1, "pvalue", 0),
+    function_call = hApiProto(('GetValueFromThreadPololux', hDll), hApiParams)
+    res = function_call(pPololu, channel, pvalue)
     return res, pvalue[0]
 
-def SetAllPWMsFromThreadMaestro(pMaestro, selectedchannels, pws):
+def SetAllPWMsFromThreadPololu(pPololu, selectedchannels, pws):
     global hDll
 
-    nbchannels = 5
+    nbchannels = 24
     pselectedchannels = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
         pselectedchannels[k] = selectedchannels[k]
@@ -481,23 +496,23 @@ def SetAllPWMsFromThreadMaestro(pMaestro, selectedchannels, pws):
         ppws[k] = pws[k]
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
-    hApiParams = (1, "pMaestro", 0),(1, "pselectedchannels", 0),(1, "ppws", 0),
-    function_call = hApiProto(('SetAllPWMsFromThreadMaestrox', hDll), hApiParams)
-    return function_call(pMaestro, pselectedchannels, ppws)
+    hApiParams = (1, "pPololu", 0),(1, "pselectedchannels", 0),(1, "ppws", 0),
+    function_call = hApiProto(('SetAllPWMsFromThreadPololux', hDll), hApiParams)
+    return function_call(pPololu, pselectedchannels, ppws)
 
-def StartThreadMaestro(pMaestro):
+def StartThreadPololu(pPololu):
     global hDll
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
-    hApiParams = (1, "pMaestro", 0),
-    function_call = hApiProto(('StartThreadMaestrox', hDll), hApiParams)
-    return function_call(pMaestro)
+    hApiParams = (1, "pPololu", 0),
+    function_call = hApiProto(('StartThreadPololux', hDll), hApiParams)
+    return function_call(pPololu)
 
-def StopThreadMaestro(pMaestro):
+def StopThreadPololu(pPololu):
     global hDll
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
-    hApiParams = (1, "pMaestro", 0),
-    function_call = hApiProto(('StopThreadMaestrox', hDll), hApiParams)
-    return function_call(pMaestro)
+    hApiParams = (1, "pPololu", 0),
+    function_call = hApiProto(('StopThreadPololux', hDll), hApiParams)
+    return function_call(pPololu)
 
 def CreateHokuyo():
     global hDll
@@ -595,13 +610,27 @@ def DestroyRPLIDAR(pRPLIDAR):
     function_call = hApiProto(('DestroyRPLIDARx', hDll), hApiParams)
     function_call(pRPLIDAR)
 
+def GetScanDataResponseRPLIDAR(pRPLIDAR):
+    global hDll
+
+    pdistance = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
+    pangle = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
+    pbNewScan = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
+    pQuality = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
+
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
+    hApiParams = (1, "pRPLIDAR", 0),(1, "pdistance", 0),(1, "pangle", 0),(1, "pbNewScan", 0),(1, "pQuality", 0),
+    function_call = hApiProto(('GetScanDataResponseRPLIDARx', hDll), hApiParams)
+    res = function_call(pRPLIDAR, pdistance, pangle, pbNewScan, pQuality)
+    return res, pdistance[0], pangle[0], pbNewScan[0], pQuality[0]
+
 def GetExpressScanDataResponseRPLIDAR(pRPLIDAR):
     global hDll
 
     n = 32
     pdistances = (ctypes.c_double*(n))() # Memory leak here, rely on garbage collector?
     pangles = (ctypes.c_double*(n))() # Memory leak here, rely on garbage collector?
-    pbNewScan = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
+    pbNewScan = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pRPLIDAR", 0),(1, "pdistances", 0),(1, "pangles", 0),(1, "pbNewScan", 0),
@@ -623,13 +652,27 @@ def DisconnectRPLIDAR(pRPLIDAR):
     function_call = hApiProto(('DisconnectRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR)
 
+def GetScanDataResponseFromThreadRPLIDAR(pRPLIDAR):
+    global hDll
+
+    pdistance = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
+    pangle = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
+    pbNewScan = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
+    pQuality = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
+
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
+    hApiParams = (1, "pRPLIDAR", 0),(1, "pdistance", 0),(1, "pangle", 0),(1, "pbNewScan", 0),(1, "pQuality", 0),
+    function_call = hApiProto(('GetScanDataResponseFromThreadRPLIDARx', hDll), hApiParams)
+    res = function_call(pRPLIDAR, pdistance, pangle, pbNewScan, pQuality)
+    return res, pdistance[0], pangle[0], pbNewScan[0], pQuality[0]
+
 def GetExpressScanDataResponseFromThreadRPLIDAR(pRPLIDAR):
     global hDll
 
     n = 32
     pdistances = (ctypes.c_double*(n))() # Memory leak here, rely on garbage collector?
     pangles = (ctypes.c_double*(n))() # Memory leak here, rely on garbage collector?
-    pbNewScan = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
+    pbNewScan = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pRPLIDAR", 0),(1, "pdistances", 0),(1, "pangles", 0),(1, "pbNewScan", 0),
@@ -637,16 +680,30 @@ def GetExpressScanDataResponseFromThreadRPLIDAR(pRPLIDAR):
     res = function_call(pRPLIDAR, pdistances, pangles, pbNewScan)
     return res, pdistances, pangles, pbNewScan[0]
 
-def StartThreadRPLIDAR(pRPLIDAR):
+def StartScanThreadRPLIDAR(pRPLIDAR):
     global hDll
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
     hApiParams = (1, "pRPLIDAR", 0),
-    function_call = hApiProto(('StartThreadRPLIDARx', hDll), hApiParams)
+    function_call = hApiProto(('StartScanThreadRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR)
 
-def StopThreadRPLIDAR(pRPLIDAR):
+def StopScanThreadRPLIDAR(pRPLIDAR):
     global hDll
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
     hApiParams = (1, "pRPLIDAR", 0),
-    function_call = hApiProto(('StopThreadRPLIDARx', hDll), hApiParams)
+    function_call = hApiProto(('StopScanThreadRPLIDARx', hDll), hApiParams)
+    return function_call(pRPLIDAR)
+
+def StartExpressScanThreadRPLIDAR(pRPLIDAR):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pRPLIDAR", 0),
+    function_call = hApiProto(('StartExpressScanThreadRPLIDARx', hDll), hApiParams)
+    return function_call(pRPLIDAR)
+
+def StopExpressScanThreadRPLIDAR(pRPLIDAR):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pRPLIDAR", 0),
+    function_call = hApiProto(('StopExpressScanThreadRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR)

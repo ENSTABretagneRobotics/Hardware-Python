@@ -21,7 +21,16 @@ pSSC32 = CreateSSC32()
 # Check and modify the configuration file if needed...
 result = ConnectSSC32(pSSC32, 'SSC320.txt')
 
-result = SetAllPWMsSSC32(pSSC32, [1,1,1,0,0], [1000,2000,1000,1500,1500])
+nbchannels = 32
+selectedchannels = zeros(nbchannels)
+selectedchannels[0] = 1
+selectedchannels[1] = 1
+selectedchannels[2] = 1
+pws = zeros(nbchannels)
+pws[0] = 1000
+pws[1] = 2000
+pws[2] = 1000
+result = SetAllPWMsSSC32(pSSC32, selectedchannels, pws)
 
 ion() # Turn the interactive mode on.
 
@@ -39,13 +48,19 @@ while (bExit == 0):
     axis('square')
     axis([-200,200,-200,200])
     if (mod(a, 2) == 0):
-        result = SetAllPWMsFromThreadSSC32(pSSC32, [1,1,1,0,0], [1000,2000,1250,1500,1500])
+        pws[0] = 1000
+        pws[1] = 2000
+        pws[2] = 1250
+        result = SetAllPWMsFromThreadSSC32(pSSC32, selectedchannels, pws)
     else:
-        result = SetAllPWMsFromThreadSSC32(pSSC32, [1,1,1,0,0], [2000,1000,1750,1500,1500])    
+        pws[0] = 2000
+        pws[1] = 1000
+        pws[2] = 1750
+        result = SetAllPWMsFromThreadSSC32(pSSC32, selectedchannels, pws)    
     a = a+1
     str = 'a = %d\n'%(a)
     text(-150,0,str)
-    pause(2);
+    pause(2)
 
 result = StopThreadSSC32(pSSC32)
 result = DisconnectSSC32(pSSC32)

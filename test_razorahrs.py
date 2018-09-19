@@ -39,11 +39,11 @@ while (bExit == 0):
     clf()
     axis('square')
     axis([-200,200,-200,200])
-    result = GetLatestDataFromThreadRazorAHRS(pRazorAHRS);
+    result = GetLatestDataFromThreadRazorAHRS(pRazorAHRS)
     razorahrsdata = result[1]
     str='Yaw = %.2f, Pitch = %.2f, Roll = %.2f'%(razorahrsdata.Yaw*180.0/pi,razorahrsdata.Pitch*180.0/pi,razorahrsdata.Roll*180.0/pi)
     text(-150,0,str)
-    pause(0.01);
+    pause(0.01)
 
 result = StopThreadRazorAHRS(pRazorAHRS)
 result = DisconnectRazorAHRS(pRazorAHRS)

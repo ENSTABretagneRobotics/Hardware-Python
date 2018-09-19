@@ -23,7 +23,7 @@ result = ConnectHokuyo(pHokuyo, 'Hokuyo0.txt')
 
 result = GetLatestDataHokuyo(pHokuyo)
 distances = result[1]
-print('Distance on the left = ',distances[angle2kHokuyo(pHokuyo, pi/2.0)],'m \n')
+print('Distance on the left =',distances[angle2kHokuyo(pHokuyo, pi/2.0)],'m \n')
 
 ion() # Turn the interactive mode on.
 
@@ -31,7 +31,7 @@ ion() # Turn the interactive mode on.
 # pressed.
 fig = figure('Test')
 cid = fig.canvas.mpl_connect('key_press_event',on_key)
-scale = 6;
+scale = 6
 
 # If GetLatestDataHokuyo() takes too much time, use a thread to access data faster...
 result = StartThreadHokuyo(pHokuyo)
@@ -40,12 +40,11 @@ while (bExit == 0):
     clf()
     axis('square')
     axis([-scale,scale,-scale,scale])
-    result = GetLatestDataFromThreadHokuyo(pHokuyo);
+    result = GetLatestDataFromThreadHokuyo(pHokuyo)
     distances = result[1]
     angles = result[2]
-    plot(distances*cos(angles), distances*sin(angles), '.');
-    text(-150,0,str)
-    pause(0.01);
+    plot(distances*cos(angles), distances*sin(angles), '.')
+    pause(0.01)
 
 result = StopThreadHokuyo(pHokuyo)
 result = DisconnectHokuyo(pHokuyo)

@@ -17,12 +17,21 @@ def on_key(event):
     if event.key == 'escape':
         bExit = 1
 
-pMaestro = CreateMaestro()
+pPololu = CreatePololu()
 # Check and modify the configuration file if needed...
-result = ConnectMaestro(pMaestro, 'Maestro0.txt')
+result = ConnectPololu(pPololu, 'Pololu0.txt')
 
-result = SetAllPWMsMaestro(pMaestro, [1,1,1,0,0], [1000,2000,1000,1500,1500])
-result = GetValueMaestro(pMaestro, 11)
+nbchannels = 24
+selectedchannels = zeros(nbchannels)
+selectedchannels[0] = 1
+selectedchannels[1] = 1
+selectedchannels[2] = 1
+pws = zeros(nbchannels)
+pws[0] = 1000
+pws[1] = 2000
+pws[2] = 1000
+result = SetAllPWMsPololu(pPololu, selectedchannels, pws)
+result = GetValuePololu(pPololu, 11)
 value = result[1]
 print('value = ',value,'\n')
 
@@ -33,8 +42,8 @@ ion() # Turn the interactive mode on.
 fig = figure('Test')
 cid = fig.canvas.mpl_connect('key_press_event',on_key)
 
-# If GetValueMaestro(), SetAllPWMsMaestro()... take too much time, use a thread to access data faster...
-result = StartThreadMaestro(pMaestro)
+# If GetValuePololu(), SetAllPWMsPololu()... take too much time, use a thread to access data faster...
+result = StartThreadPololu(pPololu)
 
 a = 0
 while (bExit == 0):
@@ -42,16 +51,22 @@ while (bExit == 0):
     axis('square')
     axis([-200,200,-200,200])
     if (mod(a, 2) == 0):
-        result = SetAllPWMsFromThreadMaestro(pMaestro, [1,1,1,0,0], [1000,2000,1250,1500,1500])
+        pws[0] = 1000
+        pws[1] = 2000
+        pws[2] = 1250
+        result = SetAllPWMsFromThreadPololu(pPololu, selectedchannels, pws)
     else:
-        result = SetAllPWMsFromThreadMaestro(pMaestro, [1,1,1,0,0], [2000,1000,1750,1500,1500])    
+        pws[0] = 1000
+        pws[1] = 2000
+        pws[2] = 1250
+        result = SetAllPWMsFromThreadPololu(pPololu, selectedchannels, pws)    
     a = a+1
-    result = GetValueFromThreadMaestro(pMaestro, 11)
+    result = GetValueFromThreadPololu(pPololu, 11)
     value = result[1]
     str = 'a = %d, value = %d\n'%(a, value)
     text(-150,0,str)
-    pause(2);
+    pause(2)
 
-result = StopThreadMaestro(pMaestro)
-result = DisconnectMaestro(pMaestro)
-DestroyMaestro(pMaestro)
+result = StopThreadPololu(pPololu)
+result = DisconnectPololu(pPololu)
+DestroyPololu(pPololu)
