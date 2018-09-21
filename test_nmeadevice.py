@@ -36,9 +36,7 @@ cid = fig.canvas.mpl_connect('key_press_event',on_key)
 result = StartThreadNMEADevice(pNMEADevice)
 
 while (bExit == 0):
-    clf()
-    axis('square')
-    axis([-200,200,-200,200])
+    clf(); axis('square'); axis([-200,200,-200,200])
     result = GetLatestDataFromThreadNMEADevice(pNMEADevice)
     nmeadata = result[1]
     if ((abs(nmeadata.Latitude) > 0) & (abs(nmeadata.Longitude) > 0)): # Check if latitude and longitude are not 0, which means invalid.

@@ -37,12 +37,9 @@ scale = 6
 result = StartThreadHokuyo(pHokuyo)
 
 while (bExit == 0):
-    clf()
-    axis('square')
-    axis([-scale,scale,-scale,scale])
+    clf(); axis('square'); axis([-scale,scale,-scale,scale])
     result = GetLatestDataFromThreadHokuyo(pHokuyo)
-    distances = result[1]
-    angles = result[2]
+    distances = result[1]; angles = result[2]
     plot(distances*cos(angles), distances*sin(angles), '.')
     pause(0.01)
 

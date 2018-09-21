@@ -23,7 +23,7 @@ result = ConnectRazorAHRS(pRazorAHRS, 'RazorAHRS0.txt')
 
 result = GetLatestDataRazorAHRS(pRazorAHRS)
 razorahrsdata = result[1]
-print('Yaw = ',razorahrsdata.Yaw*180.0/pi,', Pitch = ',razorahrsdata.Pitch*180.0/pi,', Roll = ',razorahrsdata.Roll*180.0/pi,'\n')
+print('Yaw =',razorahrsdata.Yaw*180.0/pi,', Pitch =',razorahrsdata.Pitch*180.0/pi,', Roll =',razorahrsdata.Roll*180.0/pi,'\n')
 
 ion() # Turn the interactive mode on.
 
@@ -36,9 +36,7 @@ cid = fig.canvas.mpl_connect('key_press_event',on_key)
 result = StartThreadRazorAHRS(pRazorAHRS)
 
 while (bExit == 0):
-    clf()
-    axis('square')
-    axis([-200,200,-200,200])
+    clf(); axis('square'); axis([-200,200,-200,200])
     result = GetLatestDataFromThreadRazorAHRS(pRazorAHRS)
     razorahrsdata = result[1]
     str='Yaw = %.2f, Pitch = %.2f, Roll = %.2f'%(razorahrsdata.Yaw*180.0/pi,razorahrsdata.Pitch*180.0/pi,razorahrsdata.Roll*180.0/pi)

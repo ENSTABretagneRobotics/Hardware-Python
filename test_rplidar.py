@@ -22,12 +22,10 @@ pRPLIDAR = CreateRPLIDAR()
 result = ConnectRPLIDAR(pRPLIDAR, 'RPLIDAR0.txt')
 
 result = GetScanDataResponseRPLIDAR(pRPLIDAR)
-distance = result[1]
-angle = result[2]
+distance = result[1]; angle = result[2]; bNewScan = result[3]; quality = result[4]
 print('Distance at',angle*180.0/pi,'deg =',distance,'m \n')
 #result = GetExpressScanDataResponseRPLIDAR(pRPLIDAR)
-#distances = result[1]
-#angles = result[2]
+#distances = result[1]; angles = result[2]; bNewScan = result[3]
 #print('Distance at',angles[0]*180.0/pi,'deg =',distances[0],'m \n')
 
 ion() # Turn the interactive mode on.
@@ -38,35 +36,23 @@ fig = figure('Test')
 cid = fig.canvas.mpl_connect('key_press_event',on_key)
 scale = 6
 
-# If GetLatestDataRPLIDAR() takes too much time, use a thread to access data faster...
 #result = StartScanThreadRPLIDAR(pRPLIDAR)
 #result = StartExpressScanThreadRPLIDAR(pRPLIDAR)
 
-count = 0
-clf()
-axis('square')
-axis([-scale,scale,-scale,scale])
+count = 0; alldistances = []; allangles = []
 while (bExit == 0):
-    if count > 360:
-        count = 0
-        clf()
-        axis('square')
-        axis([-scale,scale,-scale,scale])
     result = GetScanDataResponseRPLIDAR(pRPLIDAR)
     #result = GetScanDataResponseFromThreadRPLIDAR(pRPLIDAR)
-    distance = result[1]
-    angle = result[2]
-    bNewScan = result[3]
-    #print('Distance at',angle*180.0/pi,'deg =',distance,'m \n')
-    plot(distance*cos(angle), distance*sin(angle), '.')
+    #result = GetExpressScanDataResponseRPLIDAR(pRPLIDAR)
     #result = GetExpressScanDataResponseFromThreadRPLIDAR(pRPLIDAR)
-    #distances = result[1]
-    #angles = result[2]
-    #bNewScan = result[3]
-    ##print('Distance at',angles[0]*180.0/pi,'deg =',distances[0],'m \n')
-    #plot(distances[0]*cos(angles[0]), distances[0]*sin(angles[0]), '.')
+    distances = result[1]; angles = result[2]; bNewScan = result[3];
+    alldistances.append(distances); allangles.append(angles)
+    if count > 360:
+        clf(); axis('square'); axis([-scale,scale,-scale,scale])
+        plot(alldistances*cos(allangles), alldistances*sin(allangles), '.')
+        pause(0.01)
+        count = 0; alldistances = []; allangles = []
     count = count+1;
-    pause(0.001)
 
 #result = StopScanThreadRPLIDAR(pRPLIDAR)
 #result = StopExpressScanThreadRPLIDAR(pRPLIDAR)
