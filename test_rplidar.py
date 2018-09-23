@@ -48,6 +48,7 @@ while (bExit == 0):
     distances = result[1]; angles = result[2]; bNewScan = result[3];
     alldistances.append(distances); allangles.append(angles)
     if count > 360:
+    #if count > 720/32:
         clf(); axis('square'); axis([-scale,scale,-scale,scale])
         plot(alldistances*cos(allangles), alldistances*sin(allangles), '.')
         pause(0.01)
