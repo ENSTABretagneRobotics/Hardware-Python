@@ -1,8 +1,21 @@
 from __future__ import print_function
 import ctypes
+from ctypes import util
+import sys
 
 # Load DLL into memory.
-hDll = ctypes.CDLL("hardwarex.dll")
+if sys.platform.startswith('win'):
+    is_64bits = sys.maxsize > 2**32
+    if is_64bits:
+        hDll = ctypes.CDLL("x64/hardwarex.dll")
+    else:
+        hDll = ctypes.CDLL("x86/hardwarex.dll")
+elif sys.platform.startswith('linux'):
+    hDll = ctypes.CDLL("libhardwarex.so")
+elif sys.platform.startswith('darwin'):
+    hDll = ctypes.CDLL("libhardwarex.dylib")
+else:
+    hDll = ctypes.CDLL(ctypes.util.find_library("hardwarex"))
 
 class UTC_Time_SBG(ctypes.Structure):
     _fields_ = [("Nanoseconds", ctypes.c_uint),

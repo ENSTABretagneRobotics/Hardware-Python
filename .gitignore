@@ -4,6 +4,9 @@ __pycache__/
 hardwarex.dll
 hardwarex.so
 libhardwarex.so
-!win32-*/hardwarex.dll
-!linux-*/hardwarex.so
-!linux-*/libhardwarex.so
+!x86/hardwarex.dll
+!x64/hardwarex.dll
+!linux_x86/hardwarex.so
+!linux_x86/libhardwarex.so
+!linux_x64/hardwarex.so
+!linux_x64/libhardwarex.so
