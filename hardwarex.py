@@ -595,6 +595,39 @@ def DestroySSC32(pSSC32):
     function_call = hApiProto(('DestroySSC32x', hDll), hApiParams)
     function_call(pSSC32)
 
+def GetVoltageSSC32(pSSC32, channel):
+    global hDll
+
+    pvoltage = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
+
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.POINTER(ctypes.c_double))
+    hApiParams = (1, "pSSC32", 0),(1, "channel", 0),(1, "pvoltage", 0),
+    function_call = hApiProto(('GetVoltageSSC32x', hDll), hApiParams)
+    res = function_call(pSSC32, channel, pvoltage)
+    return res, pvalue[0]
+
+def GetDigitalInputSSC32(pSSC32, channel):
+    global hDll
+
+    pvalue = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
+
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.POINTER(ctypes.c_int))
+    hApiParams = (1, "pSSC32", 0),(1, "channel", 0),(1, "pvalue", 0),
+    function_call = hApiProto(('GetDigitalInputSSC32x', hDll), hApiParams)
+    res = function_call(pSSC32, channel, pvalue)
+    return res, pvalue[0]
+
+def GetPWMSSC32(pSSC32, channel):
+    global hDll
+
+    ppw = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
+
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.POINTER(ctypes.c_int))
+    hApiParams = (1, "pSSC32", 0),(1, "channel", 0),(1, "ppw", 0),
+    function_call = hApiProto(('GetPWMSSC32x', hDll), hApiParams)
+    res = function_call(pSSC32, channel, ppw)
+    return res, ppw[0]
+
 def SetPWMSSC32(pSSC32, channel, pw):
     global hDll
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.c_int)
@@ -617,6 +650,13 @@ def SetAllPWMsSSC32(pSSC32, selectedchannels, pws):
     hApiParams = (1, "pSSC32", 0),(1, "pselectedchannels", 0),(1, "ppws", 0),
     function_call = hApiProto(('SetAllPWMsSSC32x', hDll), hApiParams)
     return function_call(pSSC32, pselectedchannels, ppws)
+
+def SetDigitalOutputSSC32(pSSC32, channel, value):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.c_int)
+    hApiParams = (1, "pSSC32", 0),(1, "channel", 0),(1, "value", 0),
+    function_call = hApiProto(('SetDigitalOutputSSC32x', hDll), hApiParams)
+    return function_call(pSSC32, channel, value)
 
 def ConnectSSC32(pSSC32, cfgFilePath):
     global hDll
@@ -709,6 +749,13 @@ def SetAllPWMsPololu(pPololu, selectedchannels, pws):
     hApiParams = (1, "pPololu", 0),(1, "pselectedchannels", 0),(1, "ppws", 0),
     function_call = hApiProto(('SetAllPWMsPololux', hDll), hApiParams)
     return function_call(pPololu, pselectedchannels, ppws)
+
+def SetPWMJrkPololu(pPololu, pw):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int)
+    hApiParams = (1, "pPololu", 0),(1, "pw", 0),
+    function_call = hApiProto(('SetPWMJrkPololux', hDll), hApiParams)
+    return function_call(pPololu, pw)
 
 def ConnectPololu(pPololu, cfgFilePath):
     global hDll

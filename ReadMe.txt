@@ -18,7 +18,7 @@ Hardware support :
 - Hokuyo : Hokuyo URG-04LX-UG01 laser telemeter.
 - MT : Xsens MTi, MTi-G AHRS.
 - NMEADevice (superseded by ublox) : GPS, Furuno WS200 weather station.
-- Pololu : Pololu Mini Maestro 6, 18, 24 servo controllers.
+- Pololu : Pololu Mini Maestro 6, 18, 24 servo controllers, Pololu Jrk (preliminary support).
 - RazorAHRS : SparkFun 9DOF Razor IMU (flash firmware from https://github.com/lebarsfa/razor-9dof-ahrs if needed).
 - RPLIDAR : RPLIDAR A1 and A2 laser telemeters.
 - SBG : SBG Systems Ellipse AHRS.
