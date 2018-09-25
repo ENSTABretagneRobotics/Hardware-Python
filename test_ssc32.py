@@ -21,12 +21,19 @@ pSSC32 = CreateSSC32()
 # Check and modify the configuration file if needed...
 result = ConnectSSC32(pSSC32, 'SSC320.txt')
 
+pause(0.1)
+result = SetPWMSSC32(pSSC32, 0, 1350)
+pause(0.5)
 nbchannels = 32
 selectedchannels = zeros(nbchannels)
 selectedchannels[0] = 1; selectedchannels[1] = 1; selectedchannels[2] = 1
 pws = zeros(nbchannels)
 pws[0] = 1000; pws[1] = 2000; pws[2] = 1000
 result = SetAllPWMsSSC32(pSSC32, selectedchannels, pws)
+pause(0.1)
+result = GetVoltageSSC32(pSSC32, 0)
+value = result[1]
+print('value = ',value,'\n')
 
 ion() # Turn the interactive mode on.
 

@@ -21,12 +21,16 @@ pPololu = CreatePololu()
 # Check and modify the configuration file if needed...
 result = ConnectPololu(pPololu, 'Pololu0.txt')
 
+pause(0.1)
+result = SetPWMPololu(pPololu, 0, 1350)
+pause(0.5)
 nbchannels = 24
 selectedchannels = zeros(nbchannels)
 selectedchannels[0] = 1; selectedchannels[1] = 1; selectedchannels[2] = 1
 pws = zeros(nbchannels)
 pws[0] = 1000; pws[1] = 2000; pws[2] = 1000
 result = SetAllPWMsPololu(pPololu, selectedchannels, pws)
+pause(0.1)
 result = GetValuePololu(pPololu, 11)
 value = result[1]
 print('value = ',value,'\n')
