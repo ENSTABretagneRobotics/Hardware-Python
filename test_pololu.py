@@ -52,7 +52,7 @@ while (bExit == 0):
         pws[0] = 1000; pws[1] = 2000; pws[2] = 1250
         result = SetAllPWMsFromThreadPololu(pPololu, selectedchannels, pws)
     else:
-        pws[0] = 1000; pws[1] = 2000; pws[2] = 1250
+        pws[0] = 2000; pws[1] = 1000; pws[2] = 1750
         result = SetAllPWMsFromThreadPololu(pPololu, selectedchannels, pws)    
     a = a+1
     result = GetValueFromThreadPololu(pPololu, 11)
