@@ -349,6 +349,156 @@ def StopThreadRazorAHRS(pRazorAHRS):
     function_call = hApiProto(('StopThreadRazorAHRSx', hDll), hApiParams)
     return function_call(pRazorAHRS)
 
+def CreateMDM():
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = None
+    function_call = hApiProto(('CreateMDMx', hDll), hApiParams)
+    return function_call()
+
+def DestroyMDM(pMDM):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(None, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pMDM", 0),
+    function_call = hApiProto(('DestroyMDMx', hDll), hApiParams)
+    function_call(pMDM)
+
+def SendDataMDM(pMDM, buf, buflen):
+    global hDll
+    
+    pbuf = (ctypes.c_ubyte*(buflen))() # Memory leak here, rely on garbage collector?
+    for k in range(buflen):
+        pbuf[k] = int(buf[k])
+    pSentBytes = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
+
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_ubyte), ctypes.c_int, ctypes.POINTER(ctypes.c_int))
+    hApiParams = (1, "pMDM", 0),(1, "pbuf", 0),(1, "buflen", 0),(1, "pSentBytes", 0),
+    function_call = hApiProto(('SendDataMDMx', hDll), hApiParams)
+    res = function_call(pMDM, pbuf, buflen, pSentBytes)
+    return res, pSentBytes[0]
+
+def RecvcDataMDM(pMDM, buf, buflen):
+    global hDll
+    
+    pbuf = (ctypes.c_ubyte*(buflen))() # Memory leak here, rely on garbage collector?
+    for k in range(buflen):
+        pbuf[k] = int(buf[k])
+    pReceivedBytes = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
+
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_ubyte), ctypes.c_int, ctypes.POINTER(ctypes.c_int))
+    hApiParams = (1, "pMDM", 0),(1, "pbuf", 0),(1, "buflen", 0),(1, "pReceivedBytes", 0),
+    function_call = hApiProto(('RecvcDataMDMx', hDll), hApiParams)
+    res = function_call(pMDM, pbuf, buflen, pReceivedBytes)
+    return res, pReceivedBytes[0]
+
+def PurgeDataMDM(pMDM):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pMDM", 0),
+    function_call = hApiProto(('PurgeDataMDMx', hDll), hApiParams)
+    res = function_call(pMDM)
+    return res
+
+def ConnectMDM(pMDM, cfgFilePath):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_char_p)
+    hApiParams = (1, "pMDM", 0),(1, "cfgFilePath", 0),
+    function_call = hApiProto(('ConnectMDMx', hDll), hApiParams)
+    return function_call(pMDM, cfgFilePath.encode('UTF-8'))
+
+def DisconnectMDM(pMDM):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pMDM", 0),
+    function_call = hApiProto(('DisconnectMDMx', hDll), hApiParams)
+    return function_call(pMDM)
+
+def CreateP33x():
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = None
+    function_call = hApiProto(('CreateP33xx', hDll), hApiParams)
+    return function_call()
+
+def DestroyP33x(pP33x):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(None, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pP33x", 0),
+    function_call = hApiProto(('DestroyP33xx', hDll), hApiParams)
+    function_call(pP33x)
+
+def GetPressureP33x(pP33x):
+    global hDll
+    
+    ppressure = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
+
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_double))
+    hApiParams = (1, "pP33x", 0),(1, "ppressure", 0),
+    function_call = hApiProto(('GetPressureP33xx', hDll), hApiParams)
+    res = function_call(pP33x, ppressure)
+    return res, ppressure[0]
+
+def GetTemperatureP33x(pP33x):
+    global hDll
+    
+    ptemperature = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
+
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_double))
+    hApiParams = (1, "pP33x", 0),(1, "ptemperature", 0),
+    function_call = hApiProto(('GetTemperatureP33xx', hDll), hApiParams)
+    res = function_call(pP33x, ptemperature)
+    return res, ptemperature[0]
+
+def ConnectP33x(pP33x, cfgFilePath):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_char_p)
+    hApiParams = (1, "pP33x", 0),(1, "cfgFilePath", 0),
+    function_call = hApiProto(('ConnectP33xx', hDll), hApiParams)
+    return function_call(pP33x, cfgFilePath.encode('UTF-8'))
+
+def DisconnectP33x(pP33x):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pP33x", 0),
+    function_call = hApiProto(('DisconnectP33xx', hDll), hApiParams)
+    return function_call(pP33x)
+
+def GetPressureFromThreadP33x(pP33x):
+    global hDll
+    
+    ppressure = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
+
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_double))
+    hApiParams = (1, "pP33x", 0),(1, "ppressure", 0),
+    function_call = hApiProto(('GetPressureFromThreadP33xx', hDll), hApiParams)
+    res = function_call(pP33x, ppressure)
+    return res, ppressure[0]
+
+def GetTemperatureFromThreadP33x(pP33x):
+    global hDll
+    
+    ptemperature = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
+
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_double))
+    hApiParams = (1, "pP33x", 0),(1, "ptemperature", 0),
+    function_call = hApiProto(('GetTemperatureFromThreadP33xx', hDll), hApiParams)
+    res = function_call(pP33x, ptemperature)
+    return res, ptemperature[0]
+
+def StartThreadP33x(pP33x):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pP33x", 0),
+    function_call = hApiProto(('StartThreadP33xx', hDll), hApiParams)
+    return function_call(pP33x)
+
+def StopThreadP33x(pP33x):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pP33x", 0),
+    function_call = hApiProto(('StopThreadP33xx', hDll), hApiParams)
+    return function_call(pP33x)
+
 class NMEADATA(ctypes.Structure):
     _fields_ = [("utc", ctypes.c_double), ("date", ctypes.c_double),
                 ("pressure", ctypes.c_double), ("temperature", ctypes.c_double),
@@ -581,6 +731,90 @@ def StopNMEAThreadublox(publox):
     function_call = hApiProto(('StopNMEAThreadubloxx', hDll), hApiParams)
     return function_call(publox)
 
+def CreateIM483I():
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = None
+    function_call = hApiProto(('CreateIM483Ix', hDll), hApiParams)
+    return function_call()
+
+def DestroyIM483I(pIM483I):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(None, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pIM483I", 0),
+    function_call = hApiProto(('DestroyIM483Ix', hDll), hApiParams)
+    function_call(pIM483I)
+
+def SetMotorTorqueIM483I(pIM483I, percent):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int)
+    hApiParams = (1, "pIM483I", 0),(1, "angle", 0),
+    function_call = hApiProto(('SetMotorTorqueIM483Ix', hDll), hApiParams)
+    return function_call(pIM483I, angle)
+
+def SetMotorSpeedIM483I(pIM483I, val):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int)
+    hApiParams = (1, "pIM483I", 0),(1, "angle", 0),
+    function_call = hApiProto(('SetMotorSpeedIM483Ix', hDll), hApiParams)
+    return function_call(pIM483I, angle)
+
+def SetMotorOriginIM483I(pIM483I, angle):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pIM483I", 0),
+    function_call = hApiProto(('SetMotorOriginIM483Ix', hDll), hApiParams)
+    return function_call(pIM483I)
+
+def SetMaxAngleIM483I(pIM483I, angle):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_double)
+    hApiParams = (1, "pIM483I", 0),(1, "angle", 0),
+    function_call = hApiProto(('SetMaxAngleIM483Ix', hDll), hApiParams)
+    return function_call(pIM483I, angle)
+
+def CalibrateIM483I(pIM483I):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pIM483I", 0),
+    function_call = hApiProto(('CalibrateIM483Ix', hDll), hApiParams)
+    return function_call(pIM483I, channel, value)
+
+def ConnectIM483I(pIM483I, cfgFilePath):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_char_p)
+    hApiParams = (1, "pIM483I", 0),(1, "cfgFilePath", 0),
+    function_call = hApiProto(('ConnectIM483Ix', hDll), hApiParams)
+    return function_call(pIM483I, cfgFilePath.encode('UTF-8'))
+
+def DisconnectIM483I(pIM483I):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pIM483I", 0),
+    function_call = hApiProto(('DisconnectIM483Ix', hDll), hApiParams)
+    return function_call(pIM483I)
+
+def SetMaxAngleFromThreadIM483I(pIM483I, angle):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_double)
+    hApiParams = (1, "pIM483I", 0),(1, "angle", 0),
+    function_call = hApiProto(('SetMaxAngleFromThreadIM483Ix', hDll), hApiParams)
+    return function_call(pIM483I, angle)
+
+def StartThreadIM483I(pIM483I):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pIM483I", 0),
+    function_call = hApiProto(('StartThreadIM483Ix', hDll), hApiParams)
+    return function_call(pIM483I)
+
+def StopThreadIM483I(pIM483I):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pIM483I", 0),
+    function_call = hApiProto(('StopThreadIM483Ix', hDll), hApiParams)
+    return function_call(pIM483I)
+
 def CreateSSC32():
     global hDll
     hApiProto = ctypes.CFUNCTYPE(ctypes.POINTER(ctypes.c_void_p))
@@ -641,10 +875,10 @@ def SetAllPWMsSSC32(pSSC32, selectedchannels, pws):
     nbchannels = 32
     pselectedchannels = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
-        pselectedchannels[k] = selectedchannels[k]
+        pselectedchannels[k] = int(selectedchannels[k])
     ppws = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
-        ppws[k] = pws[k]
+        ppws[k] = int(pws[k])
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pSSC32", 0),(1, "pselectedchannels", 0),(1, "ppws", 0),
@@ -678,10 +912,10 @@ def SetAllPWMsFromThreadSSC32(pSSC32, selectedchannels, pws):
     nbchannels = 32
     pselectedchannels = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
-        pselectedchannels[k] = selectedchannels[k]
+        pselectedchannels[k] = int(selectedchannels[k])
     ppws = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
-        ppws[k] = pws[k]
+        ppws[k] = int(pws[k])
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pSSC32", 0),(1, "pselectedchannels", 0),(1, "ppws", 0),
@@ -727,6 +961,22 @@ def GetValuePololu(pPololu, channel):
     res = function_call(pPololu, channel, pvalue)
     return res, pvalue[0]
 
+def GetAllValuesPololu(pPololu, selectedchannels, ais):
+    global hDll
+
+    nbchannels = 24
+    pselectedchannels = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
+    for k in range(nbchannels):
+        pselectedchannels[k] = int(selectedchannels[k])
+    ppws = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
+    for k in range(nbchannels):
+        pais[k] = int(ais[k])
+
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
+    hApiParams = (1, "pPololu", 0),(1, "pselectedchannels", 0),(1, "pais", 0),
+    function_call = hApiProto(('GetAllValuesPololux', hDll), hApiParams)
+    return function_call(pPololu, pselectedchannels, pais)
+
 def SetPWMPololu(pPololu, channel, pw):
     global hDll
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.c_int)
@@ -740,10 +990,10 @@ def SetAllPWMsPololu(pPololu, selectedchannels, pws):
     nbchannels = 24
     pselectedchannels = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
-        pselectedchannels[k] = selectedchannels[k]
+        pselectedchannels[k] = int(selectedchannels[k])
     ppws = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
-        ppws[k] = pws[k]
+        ppws[k] = int(pws[k])
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pPololu", 0),(1, "pselectedchannels", 0),(1, "ppws", 0),
@@ -788,10 +1038,10 @@ def SetAllPWMsFromThreadPololu(pPololu, selectedchannels, pws):
     nbchannels = 24
     pselectedchannels = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
-        pselectedchannels[k] = selectedchannels[k]
+        pselectedchannels[k] = int(selectedchannels[k])
     ppws = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
-        ppws[k] = pws[k]
+        ppws[k] = int(pws[k])
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pPololu", 0),(1, "pselectedchannels", 0),(1, "ppws", 0),
