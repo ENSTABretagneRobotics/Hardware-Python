@@ -43,11 +43,15 @@ class SBGDATA(ctypes.Structure):
                 ("eulerStdDev", ctypes.c_float*3),
                 ("positionStdDev", ctypes.c_float*3),
                 ("velocityStdDev", ctypes.c_float*3),
+                ("heave_period", ctypes.c_double),
+                ("surge", ctypes.c_double), ("sway", ctypes.c_double), ("heave", ctypes.c_double),
+                ("surge_accel", ctypes.c_double), ("sway_accel", ctypes.c_double), ("heave_accel", ctypes.c_double),
+                ("surge_vel", ctypes.c_double), ("sway_vel", ctypes.c_double), ("heave_vel", ctypes.c_double),
                 ("odometerVelocity", ctypes.c_double),
                 ("gpsRawData", ctypes.c_ubyte*4086),
                 ("gpsRawDataSize", ctypes.c_uint),
                 ("Status", ctypes.c_ubyte),
-                ("TS", ctypes.c_ushort),
+                ("TS", ctypes.c_uint),
                 ("UTCTime", UTC_Time_SBG),
                 ("Roll", ctypes.c_double), ("Pitch", ctypes.c_double), ("Yaw", ctypes.c_double)]
 
