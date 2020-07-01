@@ -1162,6 +1162,48 @@ def DestroyRPLIDAR(pRPLIDAR):
     function_call = hApiProto(('DestroyRPLIDARx', hDll), hApiParams)
     function_call(pRPLIDAR)
 
+def StopRequestRPLIDAR(pRPLIDAR):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pRPLIDAR", 0),
+    function_call = hApiProto(('StopRequestRPLIDARx', hDll), hApiParams)
+    return function_call(pRPLIDAR)
+
+def ResetRequestRPLIDAR(pRPLIDAR):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pRPLIDAR", 0),
+    function_call = hApiProto(('ResetRequestRPLIDARx', hDll), hApiParams)
+    return function_call(pRPLIDAR)
+
+def GetStartupMessageRPLIDAR(pRPLIDAR):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pRPLIDAR", 0),
+    function_call = hApiProto(('GetStartupMessageRPLIDARx', hDll), hApiParams)
+    return function_call(pRPLIDAR)
+
+def SetMotorPWMRequestRPLIDAR(pRPLIDAR, pwm):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int)
+    hApiParams = (1, "pRPLIDAR", 0),(1, "pwm", 0),
+    function_call = hApiProto(('SetMotorPWMRequestRPLIDARx', hDll), hApiParams)
+    return function_call(pRPLIDAR, pwm)
+
+def StartScanRequestRPLIDAR(pRPLIDAR):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pRPLIDAR", 0),
+    function_call = hApiProto(('StartScanRequestRPLIDARx', hDll), hApiParams)
+    return function_call(pRPLIDAR)
+
+def StartForceScanRequestRPLIDAR(pRPLIDAR):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pRPLIDAR", 0),
+    function_call = hApiProto(('StartForceScanRequestRPLIDARx', hDll), hApiParams)
+    return function_call(pRPLIDAR)
+
 def GetScanDataResponseRPLIDAR(pRPLIDAR):
     global hDll
 
@@ -1176,6 +1218,13 @@ def GetScanDataResponseRPLIDAR(pRPLIDAR):
     res = function_call(pRPLIDAR, pdistance, pangle, pbNewScan, pQuality)
     return res, pdistance[0], pangle[0], pbNewScan[0], pQuality[0]
 
+def StartExpressScanRequestRPLIDAR(pRPLIDAR):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pRPLIDAR", 0),
+    function_call = hApiProto(('StartExpressScanRequestRPLIDARx', hDll), hApiParams)
+    return function_call(pRPLIDAR)
+
 def GetExpressScanDataResponseRPLIDAR(pRPLIDAR):
     global hDll
 
@@ -1187,6 +1236,27 @@ def GetExpressScanDataResponseRPLIDAR(pRPLIDAR):
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pRPLIDAR", 0),(1, "pdistances", 0),(1, "pangles", 0),(1, "pbNewScan", 0),
     function_call = hApiProto(('GetExpressScanDataResponseRPLIDARx', hDll), hApiParams)
+    res = function_call(pRPLIDAR, pdistances, pangles, pbNewScan)
+    return res, pdistances, pangles, pbNewScan[0]
+
+def StartOtherScanRequestRPLIDAR(pRPLIDAR, scanmode):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int)
+    hApiParams = (1, "pRPLIDAR", 0),(1, "scanmode", 0),
+    function_call = hApiProto(('StartOtherScanRequestRPLIDARx', hDll), hApiParams)
+    return function_call(pRPLIDAR, scanmode)
+
+def GetOtherScanDataResponseRPLIDAR(pRPLIDAR):
+    global hDll
+
+    n = 32
+    pdistances = (ctypes.c_double*(n))() # Memory leak here, rely on garbage collector?
+    pangles = (ctypes.c_double*(n))() # Memory leak here, rely on garbage collector?
+    pbNewScan = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
+
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int))
+    hApiParams = (1, "pRPLIDAR", 0),(1, "pdistances", 0),(1, "pangles", 0),(1, "pbNewScan", 0),
+    function_call = hApiProto(('GetOtherScanDataResponseRPLIDARx', hDll), hApiParams)
     res = function_call(pRPLIDAR, pdistances, pangles, pbNewScan)
     return res, pdistances, pangles, pbNewScan[0]
 
