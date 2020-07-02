@@ -32,8 +32,9 @@ while (bExit == 0):
     clf(); axis('square'); axis([-200,200,-200,200])
     buf = zeros(4)
     result = RecvDataMDM(pMDM, buf, 4)
-    nbbytes = result[1]
-    str='%d'%(buf[0])
+    buf = result[1]
+    nbbytes = result[2]
+    str='%d, %d, %d, %d'%(buf[0], buf[1], buf[2], buf[3])
     text(-150,0,str)
     pause(1)
 

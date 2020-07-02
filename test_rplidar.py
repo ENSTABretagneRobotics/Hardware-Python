@@ -47,6 +47,7 @@ while (bExit == 0):
     #result = GetExpressScanDataResponseFromThreadRPLIDAR(pRPLIDAR)
     distances = result[1]; angles = result[2]; bNewScan = result[3];
     alldistances.append(distances); allangles.append(angles)
+    #if bNewScan:
     if count > 360:
     #if count > 720/32:
         clf(); axis('square'); axis([-scale,scale,-scale,scale])

@@ -372,7 +372,7 @@ def SendDataMDM(pMDM, buf, buflen):
     
     pbuf = (ctypes.c_ubyte*(buflen))() # Memory leak here, rely on garbage collector?
     for k in range(buflen):
-        pbuf[k] = int(buf[k])
+        pbuf[k] = ctypes.c_ubyte(int(buf[k]))
     pSentBytes = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_ubyte), ctypes.c_int, ctypes.POINTER(ctypes.c_int))
@@ -381,19 +381,21 @@ def SendDataMDM(pMDM, buf, buflen):
     res = function_call(pMDM, pbuf, buflen, pSentBytes)
     return res, pSentBytes[0]
 
-def RecvcDataMDM(pMDM, buf, buflen):
+def RecvDataMDM(pMDM, buf, buflen):
     global hDll
     
     pbuf = (ctypes.c_ubyte*(buflen))() # Memory leak here, rely on garbage collector?
     for k in range(buflen):
-        pbuf[k] = int(buf[k])
+        pbuf[k] = ctypes.c_ubyte(int(buf[k]))
     pReceivedBytes = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_ubyte), ctypes.c_int, ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pMDM", 0),(1, "pbuf", 0),(1, "buflen", 0),(1, "pReceivedBytes", 0),
-    function_call = hApiProto(('RecvcDataMDMx', hDll), hApiParams)
+    function_call = hApiProto(('RecvDataMDMx', hDll), hApiParams)
     res = function_call(pMDM, pbuf, buflen, pReceivedBytes)
-    return res, pReceivedBytes[0]
+    for k in range(buflen):
+        buf[k] = pbuf[k]
+    return res, buf, pReceivedBytes[0]
 
 def PurgeDataMDM(pMDM):
     global hDll
@@ -879,10 +881,10 @@ def SetAllPWMsSSC32(pSSC32, selectedchannels, pws):
     nbchannels = 32
     pselectedchannels = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
-        pselectedchannels[k] = int(selectedchannels[k])
+        pselectedchannels[k] = ctypes.c_int(int(selectedchannels[k]))
     ppws = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
-        ppws[k] = int(pws[k])
+        ppws[k] = ctypes.c_int(pws[k])
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pSSC32", 0),(1, "pselectedchannels", 0),(1, "ppws", 0),
@@ -916,10 +918,10 @@ def SetAllPWMsFromThreadSSC32(pSSC32, selectedchannels, pws):
     nbchannels = 32
     pselectedchannels = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
-        pselectedchannels[k] = int(selectedchannels[k])
+        pselectedchannels[k] = ctypes.c_int(int(selectedchannels[k]))
     ppws = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
-        ppws[k] = int(pws[k])
+        ppws[k] = ctypes.c_int(pws[k])
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pSSC32", 0),(1, "pselectedchannels", 0),(1, "ppws", 0),
@@ -971,10 +973,10 @@ def GetAllValuesPololu(pPololu, selectedchannels, ais):
     nbchannels = 24
     pselectedchannels = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
-        pselectedchannels[k] = int(selectedchannels[k])
+        pselectedchannels[k] = ctypes.c_int(int(selectedchannels[k]))
     ppws = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
-        pais[k] = int(ais[k])
+        pais[k] = ctypes.c_int(ais[k])
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pPololu", 0),(1, "pselectedchannels", 0),(1, "pais", 0),
@@ -994,10 +996,10 @@ def SetAllPWMsPololu(pPololu, selectedchannels, pws):
     nbchannels = 24
     pselectedchannels = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
-        pselectedchannels[k] = int(selectedchannels[k])
+        pselectedchannels[k] = ctypes.c_int(int(selectedchannels[k]))
     ppws = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
-        ppws[k] = int(pws[k])
+        ppws[k] = ctypes.c_int(pws[k])
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pPololu", 0),(1, "pselectedchannels", 0),(1, "ppws", 0),
@@ -1042,10 +1044,10 @@ def SetAllPWMsFromThreadPololu(pPololu, selectedchannels, pws):
     nbchannels = 24
     pselectedchannels = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
-        pselectedchannels[k] = int(selectedchannels[k])
+        pselectedchannels[k] = ctypes.c_int(int(selectedchannels[k]))
     ppws = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
-        ppws[k] = int(pws[k])
+        ppws[k] = ctypes.c_int(pws[k])
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pPololu", 0),(1, "pselectedchannels", 0),(1, "ppws", 0),
@@ -1182,6 +1184,35 @@ def GetStartupMessageRPLIDAR(pRPLIDAR):
     hApiParams = (1, "pRPLIDAR", 0),
     function_call = hApiProto(('GetStartupMessageRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR)
+
+def GetHealthRequestRPLIDAR(pRPLIDAR):
+    global hDll
+
+    pbProtectionStop = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
+
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int))
+    hApiParams = (1, "pRPLIDAR", 0),(1, "pbProtectionStop", 0),
+    function_call = hApiProto(('GetHealthRequestRPLIDARx', hDll), hApiParams)
+    res = function_call(pRPLIDAR, pbProtectionStop)
+    return res, pbProtectionStop[0]
+
+def GetInfoRequestRPLIDAR(pRPLIDAR):
+    global hDll
+
+    pModelID = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
+    pHardwareVersion = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
+    pFirmwareMajor = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
+    pFirmwareMinor = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
+    #SerialNumber = (ctypes.c_byte*(33))() # Memory leak here, rely on garbage collector?
+    #for k in range(33):
+    #    SerialNumber[k] = ctypes.c_byte(int(0))
+    SerialNumber = ctypes.create_string_buffer(33)
+
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int), ctypes.c_char_p)
+    hApiParams = (1, "pRPLIDAR", 0),(1, "pModelID", 0),(1, "pHardwareVersion", 0),(1, "pFirmwareMajor", 0),(1, "pFirmwareMinor", 0),(1, "SerialNumber", 0),
+    function_call = hApiProto(('GetInfoRequestRPLIDARx', hDll), hApiParams)
+    res = function_call(pRPLIDAR, pModelID, pHardwareVersion, pFirmwareMajor, pFirmwareMinor, SerialNumber)
+    return res, pModelID[0], pHardwareVersion[0], pFirmwareMajor[0], pFirmwareMinor[0], SerialNumber.value
 
 def SetMotorPWMRequestRPLIDAR(pRPLIDAR, pwm):
     global hDll
