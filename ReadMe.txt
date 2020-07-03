@@ -4,15 +4,18 @@ Windows :
 - Check `test_razorahrs.py`, `test_rplidar.py`, etc. files for usage information.
 
 Linux : 
-- Build `hardwarex.so` from Hardware-MATLAB, put it in this project folder and rename it to `libhardwarex.so`.
+- Build `hardwarex.so` from Hardware-MATLAB, put it in this project folder and rename it to `libhardwarex.so` (ensure no file named `hardwarex.so` is left in the folder).
 - Run in a terminal `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.`.
 - Check `test_razorahrs.py`, `test_rplidar.py`, etc. files for usage information.
+
+Mac OS : 
+- Follow the instructions for Linux and replace `.so` with `.dylib` and `LD_LIBRARY_PATH` with `DYLD_LIBRARY_PATH`.
 
 Sample : http://www.ensta-bretagne.fr/lebars/Share/buggy_real_gps.zip for the buggy based on an Android smartphone described on http://www.ensta-bretagne.fr/lebars/buggy_android_full.pdf .
 
 Change the device path (e.g. `COM9`) and other parameters in the configuration files (`RazorAHRS0.txt`, `RPLIDAR0.txt`, etc.) if necessary. Mind the line endings in the configuration files depending on the OS (use e.g. the command dos2unix *.txt to convert line endings for Linux)! Ensure that you closed any other application that might use the devices (reboot if unsure). Note that you need to press the ESC key to exit cleanly the test script...
 
-Tested on Windows 10 64 bit using Python 3.5 32 bit, Ubuntu 16.04 64 bit using Python 3.5 64 bit.
+Tested on Windows 10 64 bit using Python 3.5 32 bit, Ubuntu 18.04 64 bit using Python 3.6 64 bit.
 
 Hardware support : 
 - Hokuyo : Hokuyo URG-04LX-UG01 laser telemeter.

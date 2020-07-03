@@ -21,6 +21,24 @@ pRPLIDAR = CreateRPLIDAR()
 # Check and modify the configuration file if needed...
 result = ConnectRPLIDAR(pRPLIDAR, 'RPLIDAR0.txt')
 
+## If bStartScanModeAtStartup to 0 in RPLIDAR0.txt...
+#result = GetStartupMessageRPLIDAR(pRPLIDAR)
+#print(result)
+#result = ResetRequestRPLIDAR(pRPLIDAR)
+#pause(2)
+#result = GetStartupMessageRPLIDAR(pRPLIDAR)
+#print(result)
+#result = GetInfoRequestRPLIDAR(pRPLIDAR)
+#print(result)
+#result = StopRequestRPLIDAR(pRPLIDAR)
+#print(result)
+#result = SetMotorPWMRequestRPLIDAR(pRPLIDAR, 660)
+#print(result)
+#result = StartScanRequestRPLIDAR(pRPLIDAR)
+##result = StartExpressScanRequestRPLIDAR(pRPLIDAR)
+#print(result)
+#pause(2)
+
 result = GetScanDataResponseRPLIDAR(pRPLIDAR)
 distance = result[1]; angle = result[2]; bNewScan = result[3]; quality = result[4]
 print('Distance at',angle*180.0/pi,'deg =',distance,'m \n')
