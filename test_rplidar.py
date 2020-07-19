@@ -22,15 +22,13 @@ pRPLIDAR = CreateRPLIDAR()
 result = ConnectRPLIDAR(pRPLIDAR, 'RPLIDAR0.txt')
 
 ## If bStartScanModeAtStartup to 0 in RPLIDAR0.txt...
-#result = GetStartupMessageRPLIDAR(pRPLIDAR)
-#print(result)
 #result = ResetRequestRPLIDAR(pRPLIDAR)
 #pause(2)
 #result = GetStartupMessageRPLIDAR(pRPLIDAR)
 #print(result)
-#result = GetInfoRequestRPLIDAR(pRPLIDAR)
-#print(result)
 #result = StopRequestRPLIDAR(pRPLIDAR)
+#print(result)
+#result = GetInfoRequestRPLIDAR(pRPLIDAR)
 #print(result)
 #result = SetMotorPWMRequestRPLIDAR(pRPLIDAR, 660)
 #print(result)
@@ -57,6 +55,7 @@ scale = 6
 #result = StartScanThreadRPLIDAR(pRPLIDAR)
 #result = StartExpressScanThreadRPLIDAR(pRPLIDAR)
 
+# The matplotlib display functions might cause too many delays...
 count = 0; alldistances = []; allangles = []
 while (bExit == 0):
     result = GetScanDataResponseRPLIDAR(pRPLIDAR)

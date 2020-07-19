@@ -36,6 +36,7 @@ scale = 6
 # If GetLatestDataHokuyo() takes too much time, use a thread to access data faster...
 result = StartThreadHokuyo(pHokuyo)
 
+# The matplotlib display functions might cause too many delays...
 while (bExit == 0):
     clf(); axis('square'); axis([-scale,scale,-scale,scale])
     result = GetLatestDataFromThreadHokuyo(pHokuyo)
