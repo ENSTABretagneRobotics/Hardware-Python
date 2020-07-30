@@ -1214,6 +1214,34 @@ def GetInfoRequestRPLIDAR(pRPLIDAR):
     res = function_call(pRPLIDAR, pModelID, pHardwareVersion, pFirmwareMajor, pFirmwareMinor, SerialNumber)
     return res, pModelID[0], pHardwareVersion[0], pFirmwareMajor[0], pFirmwareMinor[0], SerialNumber.value
 
+def GetTypicalScanModeRPLIDAR(pRPLIDAR):
+    global hDll
+
+    pScanModeID = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
+
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int))
+    hApiParams = (1, "pRPLIDAR", 0),(1, "pScanModeID", 0),
+    function_call = hApiProto(('GetTypicalScanModeRPLIDARx', hDll), hApiParams)
+    res = function_call(pRPLIDAR, pScanModeID)
+    return res, pScanModeID[0]
+
+def GetAllSupportedScanModesRPLIDAR(pRPLIDAR):
+    global hDll
+
+    pScanModeIDs = (ctypes.c_int*(16))() # Memory leak here, rely on garbage collector?
+    pScanModeusPerSamples = (ctypes.c_double*(16))() # Memory leak here, rely on garbage collector?
+    pScanModeMaxDistances = (ctypes.c_double*(16))() # Memory leak here, rely on garbage collector?
+    pScanModeAnsTypes = (ctypes.c_int*(16))() # Memory leak here, rely on garbage collector?
+    #pScanModeNames = ((ctypes.c_char * 64) * 16)() # Memory leak here, rely on garbage collector?
+    string_buffers = [ctypes.create_string_buffer(64) for i in range(16)]
+    pScanModeNames = (ctypes.c_char_p*16)(*map(ctypes.addressof, string_buffers))
+
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_char_p))
+    hApiParams = (1, "pRPLIDAR", 0),(1, "pScanModeIDs", 0),(1, "pScanModeusPerSamples", 0),(1, "pScanModeMaxDistances", 0),(1, "pScanModeAnsTypes", 0),(1, "pScanModeNames", 0),
+    function_call = hApiProto(('GetAllSupportedScanModesRPLIDARx', hDll), hApiParams)
+    res = function_call(pRPLIDAR, pScanModeIDs, pScanModeusPerSamples, pScanModeMaxDistances, pScanModeAnsTypes, pScanModeNames)
+    return res, pScanModeIDs, pScanModeusPerSamples, pScanModeMaxDistances, pScanModeAnsTypes, pScanModeNames
+
 def SetMotorPWMRequestRPLIDAR(pRPLIDAR, pwm):
     global hDll
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int)
@@ -1270,12 +1298,12 @@ def GetExpressScanDataResponseRPLIDAR(pRPLIDAR):
     res = function_call(pRPLIDAR, pdistances, pangles, pbNewScan)
     return res, pdistances, pangles, pbNewScan[0]
 
-def StartOtherScanRequestRPLIDAR(pRPLIDAR, scanmode):
+def StartOtherScanRequestRPLIDAR(pRPLIDAR, scanmodeid):
     global hDll
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int)
-    hApiParams = (1, "pRPLIDAR", 0),(1, "scanmode", 0),
+    hApiParams = (1, "pRPLIDAR", 0),(1, "scanmodeid", 0),
     function_call = hApiProto(('StartOtherScanRequestRPLIDARx', hDll), hApiParams)
-    return function_call(pRPLIDAR, scanmode)
+    return function_call(pRPLIDAR, scanmodeid)
 
 def GetOtherScanDataResponseRPLIDAR(pRPLIDAR):
     global hDll
@@ -1359,4 +1387,18 @@ def StopExpressScanThreadRPLIDAR(pRPLIDAR):
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
     hApiParams = (1, "pRPLIDAR", 0),
     function_call = hApiProto(('StopExpressScanThreadRPLIDARx', hDll), hApiParams)
+    return function_call(pRPLIDAR)
+
+def StartOtherScanThreadRPLIDAR(pRPLIDAR):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pRPLIDAR", 0),
+    function_call = hApiProto(('StartOtherScanThreadRPLIDARx', hDll), hApiParams)
+    return function_call(pRPLIDAR)
+
+def StopOtherScanThreadRPLIDAR(pRPLIDAR):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pRPLIDAR", 0),
+    function_call = hApiProto(('StopOtherScanThreadRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR)

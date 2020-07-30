@@ -17,7 +17,7 @@ Change the device path (e.g. `COM9`) and other parameters in the configuration f
 
 Tested on Windows 10 64 bit using Python 3.5 32 bit, Ubuntu 18.04 64 bit using Python 3.6 64 bit.
 
-Hardware support : 
+Hardware support (check also `3rd_support` folder on https://github.com/ENSTABretagneRobotics/Hardware-MATLAB for advanced build options) : 
 - Hokuyo : Hokuyo URG-04LX-UG01 laser telemeter.
 - IM483I : Intelligent Motion Systems IM483I step motor controller.
 - MDM : Tritech Micron Data Modem (or other kinds of simple RS232 modems).

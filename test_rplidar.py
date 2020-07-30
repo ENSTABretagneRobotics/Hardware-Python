@@ -21,7 +21,7 @@ pRPLIDAR = CreateRPLIDAR()
 # Check and modify the configuration file if needed...
 result = ConnectRPLIDAR(pRPLIDAR, 'RPLIDAR0.txt')
 
-## If bStartScanModeAtStartup to 0 in RPLIDAR0.txt...
+# If bStartScanModeAtStartup to 0 in RPLIDAR0.txt...
 #result = ResetRequestRPLIDAR(pRPLIDAR)
 #pause(2)
 #result = GetStartupMessageRPLIDAR(pRPLIDAR)
@@ -30,10 +30,16 @@ result = ConnectRPLIDAR(pRPLIDAR, 'RPLIDAR0.txt')
 #print(result)
 #result = GetInfoRequestRPLIDAR(pRPLIDAR)
 #print(result)
+#result = GetTypicalScanModeRPLIDAR(pRPLIDAR)
+#print(result)
+#typicalscanmodeid = result[1]
+#result = GetAllSupportedScanModesRPLIDAR(pRPLIDAR)
+#print('Typical scan mode :',bytearray(result[5][typicalscanmodeid]).decode("utf-8"))
 #result = SetMotorPWMRequestRPLIDAR(pRPLIDAR, 660)
 #print(result)
 #result = StartScanRequestRPLIDAR(pRPLIDAR)
 ##result = StartExpressScanRequestRPLIDAR(pRPLIDAR)
+##result = StartOtherScanRequestRPLIDAR(pRPLIDAR, typicalscanmodeid)
 #print(result)
 #pause(2)
 
@@ -41,6 +47,8 @@ result = GetScanDataResponseRPLIDAR(pRPLIDAR)
 distance = result[1]; angle = result[2]; bNewScan = result[3]; quality = result[4]
 print('Distance at',angle*180.0/pi,'deg =',distance,'m \n')
 #result = GetExpressScanDataResponseRPLIDAR(pRPLIDAR)
+#distances = result[1]; angles = result[2]; bNewScan = result[3]
+#result = GetOtherScanDataResponseRPLIDAR(pRPLIDAR)
 #distances = result[1]; angles = result[2]; bNewScan = result[3]
 #print('Distance at',angles[0]*180.0/pi,'deg =',distances[0],'m \n')
 
@@ -54,6 +62,7 @@ scale = 6
 
 #result = StartScanThreadRPLIDAR(pRPLIDAR)
 #result = StartExpressScanThreadRPLIDAR(pRPLIDAR)
+#result = StartOtherScanThreadRPLIDAR(pRPLIDAR)
 
 # The matplotlib display functions might cause too many delays...
 count = 0; alldistances = []; allangles = []
@@ -62,6 +71,8 @@ while (bExit == 0):
     #result = GetScanDataResponseFromThreadRPLIDAR(pRPLIDAR)
     #result = GetExpressScanDataResponseRPLIDAR(pRPLIDAR)
     #result = GetExpressScanDataResponseFromThreadRPLIDAR(pRPLIDAR)
+    #result = GetOtherScanDataResponseRPLIDAR(pRPLIDAR)
+    #result = GetOtherScanDataResponseFromThreadRPLIDAR(pRPLIDAR)
     distances = result[1]; angles = result[2]; bNewScan = result[3];
     alldistances.append(distances); allangles.append(angles)
     #if bNewScan:
@@ -75,5 +86,6 @@ while (bExit == 0):
 
 #result = StopScanThreadRPLIDAR(pRPLIDAR)
 #result = StopExpressScanThreadRPLIDAR(pRPLIDAR)
+#result = StopOtherScanThreadRPLIDAR(pRPLIDAR)
 result = DisconnectRPLIDAR(pRPLIDAR)
 DestroyRPLIDAR(pRPLIDAR)
