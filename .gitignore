@@ -1,12 +1,11 @@
-TODO/
 *.pyc
 __pycache__/
-hardwarex.dll
-hardwarex.so
-libhardwarex.so
+TODO/
+!*ReadMe.txt
 !x86/hardwarex.dll
 !x64/hardwarex.dll
-!linux_x86/hardwarex.so
+!libhardwarex.so
 !linux_x86/libhardwarex.so
-!linux_x64/hardwarex.so
 !linux_x64/libhardwarex.so
+!libhardwarex.dylib
+!mac/libhardwarex.dylib

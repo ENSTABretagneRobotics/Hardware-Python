@@ -1249,6 +1249,13 @@ def SetMotorPWMRequestRPLIDAR(pRPLIDAR, pwm):
     function_call = hApiProto(('SetMotorPWMRequestRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR, pwm)
 
+def SetLidarSpinSpeedRequestRPLIDAR(pRPLIDAR, rpm):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int)
+    hApiParams = (1, "pRPLIDAR", 0),(1, "rpm", 0),
+    function_call = hApiProto(('SetLidarSpinSpeedRequestRPLIDARx', hDll), hApiParams)
+    return function_call(pRPLIDAR, rpm)
+
 def StartScanRequestRPLIDAR(pRPLIDAR):
     global hDll
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))

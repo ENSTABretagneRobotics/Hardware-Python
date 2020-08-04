@@ -4,7 +4,7 @@ Windows :
 - Check `test_razorahrs.py`, `test_rplidar.py`, etc. files for usage information.
 
 Linux : 
-- Build `hardwarex.so` from Hardware-MATLAB, put it in this project folder and rename it to `libhardwarex.so` (ensure no file named `hardwarex.so` is left in the folder).
+- Build `hardwarex.so` from Hardware-MATLAB (or get a compatible prebuilt version if any), put it in this project folder and rename it to `libhardwarex.so` (ensure no file named `hardwarex.so` is left in the folder).
 - Run in a terminal `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.`.
 - Check `test_razorahrs.py`, `test_rplidar.py`, etc. files for usage information.
 
