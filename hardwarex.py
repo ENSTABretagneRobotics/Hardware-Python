@@ -751,17 +751,24 @@ def DestroyIM483I(pIM483I):
     function_call = hApiProto(('DestroyIM483Ix', hDll), hApiParams)
     function_call(pIM483I)
 
-def SetMotorTorqueIM483I(pIM483I, percent):
+def SetMotorTorqueIM483I(pIM483I, holdpercent, runpercent):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int)
-    hApiParams = (1, "pIM483I", 0),(1, "angle", 0),
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.c_int)
+    hApiParams = (1, "pIM483I", 0),(1, "holdpercent", 0),(1, "runpercent", 0),
     function_call = hApiProto(('SetMotorTorqueIM483Ix', hDll), hApiParams)
     return function_call(pIM483I, angle)
 
 def SetMotorSpeedIM483I(pIM483I, val):
     global hDll
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int)
-    hApiParams = (1, "pIM483I", 0),(1, "angle", 0),
+    hApiParams = (1, "pIM483I", 0),(1, "val", 0),
+    function_call = hApiProto(('SetMotorSpeedIM483Ix', hDll), hApiParams)
+    return function_call(pIM483I, angle)
+
+def SetMotorRelativeIM483I(pIM483I, val, bForce):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.c_int)
+    hApiParams = (1, "pIM483I", 0),(1, "val", 0),(1, "bForce", 0),
     function_call = hApiProto(('SetMotorSpeedIM483Ix', hDll), hApiParams)
     return function_call(pIM483I, angle)
 
