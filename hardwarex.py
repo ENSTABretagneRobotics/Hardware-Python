@@ -1192,6 +1192,13 @@ def GetStartupMessageRPLIDAR(pRPLIDAR):
     function_call = hApiProto(('GetStartupMessageRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR)
 
+def ClearCacheRPLIDAR(pRPLIDAR):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pRPLIDAR", 0),
+    function_call = hApiProto(('ClearCacheRPLIDARx', hDll), hApiParams)
+    return function_call(pRPLIDAR)
+
 def GetHealthRequestRPLIDAR(pRPLIDAR):
     global hDll
 
@@ -1262,6 +1269,20 @@ def SetLidarSpinSpeedRequestRPLIDAR(pRPLIDAR, rpm):
     hApiParams = (1, "pRPLIDAR", 0),(1, "rpm", 0),
     function_call = hApiProto(('SetLidarSpinSpeedRequestRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR, rpm)
+
+def StartMotorRPLIDAR(pRPLIDAR):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pRPLIDAR", 0),
+    function_call = hApiProto(('StartMotorRPLIDARx', hDll), hApiParams)
+    return function_call(pRPLIDAR)
+
+def StopMotorRPLIDAR(pRPLIDAR):
+    global hDll
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiParams = (1, "pRPLIDAR", 0),
+    function_call = hApiProto(('StopMotorRPLIDARx', hDll), hApiParams)
+    return function_call(pRPLIDAR)
 
 def StartScanRequestRPLIDAR(pRPLIDAR):
     global hDll

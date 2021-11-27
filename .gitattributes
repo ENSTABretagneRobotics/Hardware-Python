@@ -23,15 +23,20 @@
 *.BAT eol=crlf
 *.cmd eol=crlf
 *.CMD eol=crlf
+*.PS1 eol=crlf
+*.ps1 eol=crlf
 # Might contain binary data but should try to be displayed as text...
 *.csv -text
 *.CSV -text
 # Reg files are UTF-16 and this might cause problems...
 *.reg binary
 *.REG binary
+*.NUSPEC eol=crlf
+*.nuspec eol=crlf
 
 # Common Linux files
 *.sh eol=lf
+*.bash eol=lf
 Makefile eol=lf
 
 # Common Visual Studio files
@@ -59,6 +64,10 @@ Makefile eol=lf
 # MOOS
 # Might contain binary data but should try to be displayed as text...
 *.alog -text
+
+# ROS
+*.launch eol=lf
+*.yaml eol=lf
 
 #
 *.kml eol=crlf
