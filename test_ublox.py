@@ -41,8 +41,7 @@ while (bExit == 0):
     axis([-200,200,-200,200])
     result = GetNMEASentenceFromThreadublox(publox)
     nmeadata = result[1]
-    if ((abs(nmeadata.Latitude) > 0) & (abs(nmeadata.Longitude) > 0)): # Check if latitude and longitude are not 0, which means invalid.
-        str='(LAT,LON) = (%.8f,%.8f)'%(nmeadata.Latitude,nmeadata.Longitude)
+    str='(LAT,LON) = (%.8f,%.8f)'%(nmeadata.Latitude,nmeadata.Longitude)
     text(-150,0,str)
     pause(0.01)
 
