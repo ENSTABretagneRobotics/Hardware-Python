@@ -25,10 +25,10 @@ pause(0.1)
 result = SetPWMPololu(pPololu, 0, 1350)
 pause(0.5)
 nbchannels = 24
-selectedchannels = zeros(nbchannels)
+selectedchannels = zeros(nbchannels, int)
 selectedchannels[0] = 1; selectedchannels[1] = 1; selectedchannels[2] = 1
-pws = zeros(nbchannels)
-pws[0] = 1000; pws[1] = 2000; pws[2] = 1000
+pws = zeros(nbchannels, int)
+pws[0] = int(1000); pws[1] = int(2000); pws[2] = int(1000)
 result = SetAllPWMsPololu(pPololu, selectedchannels, pws)
 pause(0.1)
 result = GetValuePololu(pPololu, 11)
@@ -49,11 +49,10 @@ a = 0
 while (bExit == 0):
     clf(); axis('square'); axis([-200,200,-200,200])
     if (mod(a, 2) == 0):
-        pws[0] = 1000; pws[1] = 2000; pws[2] = 1250
-        result = SetAllPWMsFromThreadPololu(pPololu, selectedchannels, pws)
+        pws[0] = int(1000); pws[1] = int(2000); pws[2] = int(1250)
     else:
-        pws[0] = 2000; pws[1] = 1000; pws[2] = 1750
-        result = SetAllPWMsFromThreadPololu(pPololu, selectedchannels, pws)    
+        pws[0] = int(2000); pws[1] = int(1000); pws[2] = int(1750)
+    result = SetAllPWMsFromThreadPololu(pPololu, selectedchannels, pws)    
     a = a+1
     result = GetValueFromThreadPololu(pPololu, 11)
     value = result[1]
