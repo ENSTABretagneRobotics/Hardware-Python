@@ -4,31 +4,55 @@ from ctypes import util
 import sys, os
 
 # Load DLL into memory.
+is_64bits = sys.maxsize > 2**32
 if sys.platform.startswith('win'):
-    is_64bits = sys.maxsize > 2**32
-    if is_64bits:
-        #hDll = ctypes.CDLL("x64/hardwarex.dll", winmode=True) # winmode=True necessary since Python 3.8 but not available in previous...
-        if "add_dll_directory" in dir(os):
-            os.add_dll_directory(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'x64'))
+    try:
+        if is_64bits:
+            #hDll = ctypes.CDLL("x64/hardwarex.dll", winmode=True) # winmode=True necessary since Python 3.8 but not available in previous...
+            if "add_dll_directory" in dir(os):
+                os.add_dll_directory(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'x64'))
+            else:
+                os.environ['PATH'] = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'x64') + ';' + os.environ['PATH']
+            # Should specify full path instead...? Less interesting if there are other necessary libraries in the folder...
+            #hDll = ctypes.CDLL(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'x64/hardwarex.dll'))
         else:
-            os.environ['PATH'] = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'x64') + ';' + os.environ['PATH']
-        # Should specify full path instead...? Less interesting if there are other necessary libraries in the folder...
-        #hDll = ctypes.CDLL(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'x64/hardwarex.dll'))
-    else:
-        #hDll = ctypes.CDLL("x86/hardwarex.dll", winmode=True) # winmode=True necessary since Python 3.8 but not available in previous...
-        if "add_dll_directory" in dir(os):
-            os.add_dll_directory(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'x86'))
-        else:
-            os.environ['PATH'] = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'x86') + ';' + os.environ['PATH']
-        # Should specify full path instead...? Less interesting if there are other necessary libraries in the folder...
-        #hDll = ctypes.CDLL(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'x86/hardwarex.dll'))
-    hDll = ctypes.CDLL("hardwarex.dll")
+            #hDll = ctypes.CDLL("x86/hardwarex.dll", winmode=True) # winmode=True necessary since Python 3.8 but not available in previous...
+            if "add_dll_directory" in dir(os):
+                os.add_dll_directory(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'x86'))
+            else:
+                os.environ['PATH'] = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'x86') + ';' + os.environ['PATH']
+            # Should specify full path instead...? Less interesting if there are other necessary libraries in the folder...
+            #hDll = ctypes.CDLL(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'x86/hardwarex.dll'))
+        hDll = ctypes.CDLL("hardwarex.dll")
+    except Exception:
+        try:
+            hDll = ctypes.CDLL(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.join('lib', 'hardwarex.dll')))
+        except Exception:
+            # Not sure what it does...
+            sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+            hDll = ctypes.CDLL(ctypes.util.find_library("hardwarex"))
 elif sys.platform.startswith('linux'):
-    #os.environ['LD_LIBRARY_PATH'] = os.path.dirname(os.path.realpath(__file__)) + ':' + os.environ['LD_LIBRARY_PATH'] # Not taken into account by ctypes when set here (but OK if set before calling python in the terminal)...? See https://stackoverflow.com/questions/856116/changing-ld-library-path-at-runtime-for-ctypes. Setting rpath using patchelf in the library might help finding other necessary libraries if needed...
-    hDll = ctypes.CDLL(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'libhardwarex.so'))
+    try:
+        #os.environ['LD_LIBRARY_PATH'] = os.path.dirname(os.path.realpath(__file__)) + ':' + os.environ['LD_LIBRARY_PATH'] # Not taken into account by ctypes when set here (but OK if set before calling python in the terminal)...? See https://stackoverflow.com/questions/856116/changing-ld-library-path-at-runtime-for-ctypes. Setting rpath using patchelf in the library might help finding other necessary libraries if needed...
+        hDll = ctypes.CDLL(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.join('linux_x64', 'hardwarex.so')))
+    except Exception:
+        try:
+            hDll = ctypes.CDLL(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.join('lib', 'hardwarex.so')))
+        except Exception:
+            # Not sure what it does...
+            sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+            hDll = ctypes.CDLL(ctypes.util.find_library("hardwarex"))
 elif sys.platform.startswith('darwin'):
-    #os.environ['DYLD_LIBRARY_PATH'] = os.path.dirname(os.path.realpath(__file__)) + ':' + os.environ['DYLD_LIBRARY_PATH'] # Not allowed to change here...?
-    hDll = ctypes.CDLL(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'libhardwarex.dylib'))
+    try:
+        #os.environ['DYLD_LIBRARY_PATH'] = os.path.dirname(os.path.realpath(__file__)) + ':' + os.environ['DYLD_LIBRARY_PATH'] # Not allowed to change here...?
+        hDll = ctypes.CDLL(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.join('mac', 'hardwarex.dylib')))
+    except Exception:
+        try:
+            hDll = ctypes.CDLL(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.join('lib', 'hardwarex.dylib')))
+        except Exception:
+            # Not sure what it does...
+            sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+            hDll = ctypes.CDLL(ctypes.util.find_library("hardwarex"))
 else:
     # Not sure what it does...
     sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))

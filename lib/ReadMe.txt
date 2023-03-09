@@ -1,0 +1,1 @@
+Try to rebuild the library (`hardwarex.so`, `hardwarex.dylib` or `hardwarex.dll`) from https://github.com/ENSTABretagneRobotics/Hardware-MATLAB (or get a compatible prebuilt version if any) and put it here (ensure no file named `hardwarex.so` is left in the parent folder).

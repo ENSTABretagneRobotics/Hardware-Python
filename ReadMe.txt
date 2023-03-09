@@ -1,14 +1,11 @@
 Hardware-Python
 ==============
 Windows: 
-- Check `test_razorahrs.py`, `test_rplidar.py`, etc. files for usage information.
+- Check `test_razorahrs.py`, `test_rplidar.py`, etc. for usage information.
 
-Linux: 
-- Build `hardwarex.so` from Hardware-MATLAB (or get a compatible prebuilt version if any), put it in this project folder and rename it to `libhardwarex.so` (ensure no file named `hardwarex.so` is left in the folder).
-- Check `test_razorahrs.py`, `test_rplidar.py`, etc. files for usage information.
-
-Mac OS: 
-- Follow the instructions for Linux (with `.dylib` instead of `.so`).
+Linux/macOS: 
+- See `lib` folder.
+- Check `test_razorahrs.py`, `test_rplidar.py`, etc. for usage information.
 
 Sample: http://www.ensta-bretagne.fr/lebars/Share/buggy_real_gps.zip for the buggy based on an Android smartphone described on http://www.ensta-bretagne.fr/lebars/buggy_android_full.pdf .
 
