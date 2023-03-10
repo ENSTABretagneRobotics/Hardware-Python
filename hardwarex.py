@@ -796,23 +796,23 @@ def SetMotorTorqueIM483I(pIM483I, holdpercent, runpercent):
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.c_int)
     hApiParams = (1, "pIM483I", 0),(1, "holdpercent", 0),(1, "runpercent", 0),
     function_call = hApiProto(('SetMotorTorqueIM483Ix', hDll), hApiParams)
-    return function_call(pIM483I, angle)
+    return function_call(pIM483I, holdpercent, runpercent)
 
 def SetMotorSpeedIM483I(pIM483I, val):
     global hDll
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int)
     hApiParams = (1, "pIM483I", 0),(1, "val", 0),
     function_call = hApiProto(('SetMotorSpeedIM483Ix', hDll), hApiParams)
-    return function_call(pIM483I, angle)
+    return function_call(pIM483I, val)
 
 def SetMotorRelativeIM483I(pIM483I, val, bForce):
     global hDll
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.c_int)
     hApiParams = (1, "pIM483I", 0),(1, "val", 0),(1, "bForce", 0),
     function_call = hApiProto(('SetMotorSpeedIM483Ix', hDll), hApiParams)
-    return function_call(pIM483I, angle)
+    return function_call(pIM483I, val, bForce)
 
-def SetMotorOriginIM483I(pIM483I, angle):
+def SetMotorOriginIM483I(pIM483I):
     global hDll
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
     hApiParams = (1, "pIM483I", 0),
@@ -831,7 +831,7 @@ def CalibrateIM483I(pIM483I):
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
     hApiParams = (1, "pIM483I", 0),
     function_call = hApiProto(('CalibrateIM483Ix', hDll), hApiParams)
-    return function_call(pIM483I, channel, value)
+    return function_call(pIM483I)
 
 def ConnectIM483I(pIM483I, cfgFilePath):
     global hDll
@@ -891,7 +891,7 @@ def GetVoltageSSC32(pSSC32, channel):
     hApiParams = (1, "pSSC32", 0),(1, "channel", 0),(1, "pvoltage", 0),
     function_call = hApiProto(('GetVoltageSSC32x', hDll), hApiParams)
     res = function_call(pSSC32, channel, pvoltage)
-    return res, pvalue[0]
+    return res, pvoltage[0]
 
 def GetDigitalInputSSC32(pSSC32, channel):
     global hDll
@@ -1021,7 +1021,7 @@ def GetAllValuesPololu(pPololu, selectedchannels, ais):
     pselectedchannels = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
         pselectedchannels[k] = ctypes.c_int(int(selectedchannels[k]))
-    ppws = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
+    pais = (ctypes.c_int*(nbchannels))() # Memory leak here, rely on garbage collector?
     for k in range(nbchannels):
         pais[k] = ctypes.c_int(ais[k])
 
