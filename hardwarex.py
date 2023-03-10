@@ -112,14 +112,14 @@ def DestroySBGData(pSBGData):
 
 def CreateSBG():
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_void_p)
     hApiParams = None
     function_call = hApiProto(('CreateSBGx', hDll), hApiParams)
     return function_call()
 
 def DestroySBG(pSBG):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(None, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(None, ctypes.c_void_p)
     hApiParams = (1, "pSBG", 0),
     function_call = hApiProto(('DestroySBGx', hDll), hApiParams)
     function_call(pSBG)
@@ -129,7 +129,7 @@ def GetLatestDataSBG(pSBG):
 
     pSBGData = CreateSBGData()
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(SBGDATA))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(SBGDATA))
     hApiParams = (1, "pSBG", 0),(1, "pSBGData", 0),
     function_call = hApiProto(('GetLatestDataSBGx', hDll), hApiParams)
     res = function_call(pSBG, pSBGData)
@@ -142,14 +142,14 @@ def GetLatestDataSBG(pSBG):
 
 def ConnectSBG(pSBG, cfgFilePath):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_char_p)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_char_p)
     hApiParams = (1, "pSBG", 0),(1, "cfgFilePath", 0),
     function_call = hApiProto(('ConnectSBGx', hDll), hApiParams)
     return function_call(pSBG, cfgFilePath.encode('UTF-8'))
 
 def DisconnectSBG(pSBG):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pSBG", 0),
     function_call = hApiProto(('DisconnectSBGx', hDll), hApiParams)
     return function_call(pSBG)
@@ -159,7 +159,7 @@ def GetLatestDataFromThreadSBG(pSBG):
 
     pSBGData = CreateSBGData()
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(SBGDATA))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(SBGDATA))
     hApiParams = (1, "pSBG", 0),(1, "pSBGData", 0),
     function_call = hApiProto(('GetLatestDataFromThreadSBGx', hDll), hApiParams)
     res = function_call(pSBG, pSBGData)
@@ -172,14 +172,14 @@ def GetLatestDataFromThreadSBG(pSBG):
 
 def StartThreadSBG(pSBG):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pSBG", 0),
     function_call = hApiProto(('StartThreadSBGx', hDll), hApiParams)
     return function_call(pSBG)
 
 def StopThreadSBG(pSBG):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pSBG", 0),
     function_call = hApiProto(('StopThreadSBGx', hDll), hApiParams)
     return function_call(pSBG)
@@ -228,14 +228,14 @@ def DestroyMTData(pMTData):
 
 def CreateMT():
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_void_p)
     hApiParams = None
     function_call = hApiProto(('CreateMTx', hDll), hApiParams)
     return function_call()
 
 def DestroyMT(pMT):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(None, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(None, ctypes.c_void_p)
     hApiParams = (1, "pMT", 0),
     function_call = hApiProto(('DestroyMTx', hDll), hApiParams)
     function_call(pMT)
@@ -245,7 +245,7 @@ def GetLatestDataMT(pMT):
 
     pMTData = CreateMTData()
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(MTDATA))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(MTDATA))
     hApiParams = (1, "pMT", 0),(1, "pMTData", 0),
     function_call = hApiProto(('GetLatestDataMTx', hDll), hApiParams)
     res = function_call(pMT, pMTData)
@@ -258,14 +258,14 @@ def GetLatestDataMT(pMT):
 
 def ConnectMT(pMT, cfgFilePath):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_char_p)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_char_p)
     hApiParams = (1, "pMT", 0),(1, "cfgFilePath", 0),
     function_call = hApiProto(('ConnectMTx', hDll), hApiParams)
     return function_call(pMT, cfgFilePath.encode('UTF-8'))
 
 def DisconnectMT(pMT):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pMT", 0),
     function_call = hApiProto(('DisconnectMTx', hDll), hApiParams)
     return function_call(pMT)
@@ -275,7 +275,7 @@ def GetLatestDataFromThreadMT(pMT):
 
     pMTData = CreateMTData()
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(MTDATA))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(MTDATA))
     hApiParams = (1, "pMT", 0),(1, "pMTData", 0),
     function_call = hApiProto(('GetLatestDataFromThreadMTx', hDll), hApiParams)
     res = function_call(pMT, pMTData)
@@ -288,14 +288,14 @@ def GetLatestDataFromThreadMT(pMT):
 
 def StartThreadMT(pMT):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pMT", 0),
     function_call = hApiProto(('StartThreadMTx', hDll), hApiParams)
     return function_call(pMT)
 
 def StopThreadMT(pMT):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pMT", 0),
     function_call = hApiProto(('StopThreadMTx', hDll), hApiParams)
     return function_call(pMT)
@@ -322,14 +322,14 @@ def DestroyRazorAHRSData(pRazorAHRSData):
 
 def CreateRazorAHRS():
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_void_p)
     hApiParams = None
     function_call = hApiProto(('CreateRazorAHRSx', hDll), hApiParams)
     return function_call()
 
 def DestroyRazorAHRS(pRazorAHRS):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(None, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(None, ctypes.c_void_p)
     hApiParams = (1, "pRazorAHRS", 0),
     function_call = hApiProto(('DestroyRazorAHRSx', hDll), hApiParams)
     function_call(pRazorAHRS)
@@ -339,7 +339,7 @@ def GetLatestDataRazorAHRS(pRazorAHRS):
 
     pRazorAHRSData = CreateRazorAHRSData()
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(RAZORAHRSDATA))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(RAZORAHRSDATA))
     hApiParams = (1, "pRazorAHRS", 0),(1, "pRazorAHRSData", 0),
     function_call = hApiProto(('GetLatestDataRazorAHRSx', hDll), hApiParams)
     res = function_call(pRazorAHRS, pRazorAHRSData)
@@ -352,14 +352,14 @@ def GetLatestDataRazorAHRS(pRazorAHRS):
 
 def ConnectRazorAHRS(pRazorAHRS, cfgFilePath):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_char_p)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_char_p)
     hApiParams = (1, "pRazorAHRS", 0),(1, "cfgFilePath", 0),
     function_call = hApiProto(('ConnectRazorAHRSx', hDll), hApiParams)
     return function_call(pRazorAHRS, cfgFilePath.encode('UTF-8'))
 
 def DisconnectRazorAHRS(pRazorAHRS):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pRazorAHRS", 0),
     function_call = hApiProto(('DisconnectRazorAHRSx', hDll), hApiParams)
     return function_call(pRazorAHRS)
@@ -369,7 +369,7 @@ def GetLatestDataFromThreadRazorAHRS(pRazorAHRS):
 
     pRazorAHRSData = CreateRazorAHRSData()
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(RAZORAHRSDATA))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(RAZORAHRSDATA))
     hApiParams = (1, "pRazorAHRS", 0),(1, "pRazorAHRSData", 0),
     function_call = hApiProto(('GetLatestDataFromThreadRazorAHRSx', hDll), hApiParams)
     res = function_call(pRazorAHRS, pRazorAHRSData)
@@ -382,28 +382,28 @@ def GetLatestDataFromThreadRazorAHRS(pRazorAHRS):
 
 def StartThreadRazorAHRS(pRazorAHRS):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pRazorAHRS", 0),
     function_call = hApiProto(('StartThreadRazorAHRSx', hDll), hApiParams)
     return function_call(pRazorAHRS)
 
 def StopThreadRazorAHRS(pRazorAHRS):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pRazorAHRS", 0),
     function_call = hApiProto(('StopThreadRazorAHRSx', hDll), hApiParams)
     return function_call(pRazorAHRS)
 
 def CreateMDM():
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_void_p)
     hApiParams = None
     function_call = hApiProto(('CreateMDMx', hDll), hApiParams)
     return function_call()
 
 def DestroyMDM(pMDM):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(None, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(None, ctypes.c_void_p)
     hApiParams = (1, "pMDM", 0),
     function_call = hApiProto(('DestroyMDMx', hDll), hApiParams)
     function_call(pMDM)
@@ -416,7 +416,7 @@ def SendDataMDM(pMDM, buf, buflen):
         pbuf[k] = ctypes.c_ubyte(int(buf[k]))
     pSentBytes = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_ubyte), ctypes.c_int, ctypes.POINTER(ctypes.c_int))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_ubyte), ctypes.c_int, ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pMDM", 0),(1, "pbuf", 0),(1, "buflen", 0),(1, "pSentBytes", 0),
     function_call = hApiProto(('SendDataMDMx', hDll), hApiParams)
     res = function_call(pMDM, pbuf, buflen, pSentBytes)
@@ -430,7 +430,7 @@ def RecvDataMDM(pMDM, buf, buflen):
         pbuf[k] = ctypes.c_ubyte(int(buf[k]))
     pReceivedBytes = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_ubyte), ctypes.c_int, ctypes.POINTER(ctypes.c_int))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_ubyte), ctypes.c_int, ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pMDM", 0),(1, "pbuf", 0),(1, "buflen", 0),(1, "pReceivedBytes", 0),
     function_call = hApiProto(('RecvDataMDMx', hDll), hApiParams)
     res = function_call(pMDM, pbuf, buflen, pReceivedBytes)
@@ -440,7 +440,7 @@ def RecvDataMDM(pMDM, buf, buflen):
 
 def PurgeDataMDM(pMDM):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pMDM", 0),
     function_call = hApiProto(('PurgeDataMDMx', hDll), hApiParams)
     res = function_call(pMDM)
@@ -448,28 +448,28 @@ def PurgeDataMDM(pMDM):
 
 def ConnectMDM(pMDM, cfgFilePath):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_char_p)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_char_p)
     hApiParams = (1, "pMDM", 0),(1, "cfgFilePath", 0),
     function_call = hApiProto(('ConnectMDMx', hDll), hApiParams)
     return function_call(pMDM, cfgFilePath.encode('UTF-8'))
 
 def DisconnectMDM(pMDM):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pMDM", 0),
     function_call = hApiProto(('DisconnectMDMx', hDll), hApiParams)
     return function_call(pMDM)
 
 def CreateP33x():
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_void_p)
     hApiParams = None
     function_call = hApiProto(('CreateP33xx', hDll), hApiParams)
     return function_call()
 
 def DestroyP33x(pP33x):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(None, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(None, ctypes.c_void_p)
     hApiParams = (1, "pP33x", 0),
     function_call = hApiProto(('DestroyP33xx', hDll), hApiParams)
     function_call(pP33x)
@@ -479,7 +479,7 @@ def GetPressureP33x(pP33x):
     
     ppressure = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_double))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_double))
     hApiParams = (1, "pP33x", 0),(1, "ppressure", 0),
     function_call = hApiProto(('GetPressureP33xx', hDll), hApiParams)
     res = function_call(pP33x, ppressure)
@@ -490,7 +490,7 @@ def GetTemperatureP33x(pP33x):
     
     ptemperature = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_double))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_double))
     hApiParams = (1, "pP33x", 0),(1, "ptemperature", 0),
     function_call = hApiProto(('GetTemperatureP33xx', hDll), hApiParams)
     res = function_call(pP33x, ptemperature)
@@ -498,14 +498,14 @@ def GetTemperatureP33x(pP33x):
 
 def ConnectP33x(pP33x, cfgFilePath):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_char_p)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_char_p)
     hApiParams = (1, "pP33x", 0),(1, "cfgFilePath", 0),
     function_call = hApiProto(('ConnectP33xx', hDll), hApiParams)
     return function_call(pP33x, cfgFilePath.encode('UTF-8'))
 
 def DisconnectP33x(pP33x):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pP33x", 0),
     function_call = hApiProto(('DisconnectP33xx', hDll), hApiParams)
     return function_call(pP33x)
@@ -515,7 +515,7 @@ def GetPressureFromThreadP33x(pP33x):
     
     ppressure = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_double))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_double))
     hApiParams = (1, "pP33x", 0),(1, "ppressure", 0),
     function_call = hApiProto(('GetPressureFromThreadP33xx', hDll), hApiParams)
     res = function_call(pP33x, ppressure)
@@ -526,7 +526,7 @@ def GetTemperatureFromThreadP33x(pP33x):
     
     ptemperature = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_double))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_double))
     hApiParams = (1, "pP33x", 0),(1, "ptemperature", 0),
     function_call = hApiProto(('GetTemperatureFromThreadP33xx', hDll), hApiParams)
     res = function_call(pP33x, ptemperature)
@@ -534,14 +534,14 @@ def GetTemperatureFromThreadP33x(pP33x):
 
 def StartThreadP33x(pP33x):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pP33x", 0),
     function_call = hApiProto(('StartThreadP33xx', hDll), hApiParams)
     return function_call(pP33x)
 
 def StopThreadP33x(pP33x):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pP33x", 0),
     function_call = hApiProto(('StopThreadP33xx', hDll), hApiParams)
     return function_call(pP33x)
@@ -631,14 +631,14 @@ def DestroyNMEAData(pNMEAData):
     
 def CreateNMEADevice():
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_void_p)
     hApiParams = None
     function_call = hApiProto(('CreateNMEADevicex', hDll), hApiParams)
     return function_call()
 
 def DestroyNMEADevice(pNMEADevice):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(None, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(None, ctypes.c_void_p)
     hApiParams = (1, "pNMEADevice", 0),
     function_call = hApiProto(('DestroyNMEADevicex', hDll), hApiParams)
     function_call(pNMEADevice)
@@ -648,7 +648,7 @@ def GetLatestDataNMEADevice(pNMEADevice):
 
     pNMEAData = CreateNMEAData()
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(NMEADATA))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(NMEADATA))
     hApiParams = (1, "pNMEADevice", 0),(1, "pNMEAData", 0),
     function_call = hApiProto(('GetLatestDataNMEADevicex', hDll), hApiParams)
     res = function_call(pNMEADevice, pNMEAData)
@@ -661,14 +661,14 @@ def GetLatestDataNMEADevice(pNMEADevice):
 
 def ConnectNMEADevice(pNMEADevice, cfgFilePath):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_char_p)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_char_p)
     hApiParams = (1, "pNMEADevice", 0),(1, "cfgFilePath", 0),
     function_call = hApiProto(('ConnectNMEADevicex', hDll), hApiParams)
     return function_call(pNMEADevice, cfgFilePath.encode('UTF-8'))
 
 def DisconnectNMEADevice(pNMEADevice):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pNMEADevice", 0),
     function_call = hApiProto(('DisconnectNMEADevicex', hDll), hApiParams)
     return function_call(pNMEADevice)
@@ -678,7 +678,7 @@ def GetLatestDataFromThreadNMEADevice(pNMEADevice):
 
     pNMEAData = CreateNMEAData()
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(NMEADATA))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(NMEADATA))
     hApiParams = (1, "pNMEADevice", 0),(1, "pNMEAData", 0),
     function_call = hApiProto(('GetLatestDataFromThreadNMEADevicex', hDll), hApiParams)
     res = function_call(pNMEADevice, pNMEAData)
@@ -691,28 +691,28 @@ def GetLatestDataFromThreadNMEADevice(pNMEADevice):
 
 def StartThreadNMEADevice(pNMEADevice):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pNMEADevice", 0),
     function_call = hApiProto(('StartThreadNMEADevicex', hDll), hApiParams)
     return function_call(pNMEADevice)
 
 def StopThreadNMEADevice(pNMEADevice):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pNMEADevice", 0),
     function_call = hApiProto(('StopThreadNMEADevicex', hDll), hApiParams)
     return function_call(pNMEADevice)
 
 def Createublox():
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_void_p)
     hApiParams = None
     function_call = hApiProto(('Createubloxx', hDll), hApiParams)
     return function_call()
 
 def Destroyublox(publox):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(None, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(None, ctypes.c_void_p)
     hApiParams = (1, "publox", 0),
     function_call = hApiProto(('Destroyubloxx', hDll), hApiParams)
     function_call(publox)
@@ -722,7 +722,7 @@ def GetNMEASentenceublox(publox):
 
     pNMEAData = CreateNMEAData()
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(NMEADATA))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(NMEADATA))
     hApiParams = (1, "publox", 0),(1, "pNMEAData", 0),
     function_call = hApiProto(('GetNMEASentenceubloxx', hDll), hApiParams)
     res = function_call(publox, pNMEAData)
@@ -735,14 +735,14 @@ def GetNMEASentenceublox(publox):
 
 def Connectublox(publox, cfgFilePath):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_char_p)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_char_p)
     hApiParams = (1, "publox", 0),(1, "cfgFilePath", 0),
     function_call = hApiProto(('Connectubloxx', hDll), hApiParams)
     return function_call(publox, cfgFilePath.encode('UTF-8'))
 
 def Disconnectublox(publox):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "publox", 0),
     function_call = hApiProto(('Disconnectubloxx', hDll), hApiParams)
     return function_call(publox)
@@ -752,7 +752,7 @@ def GetNMEASentenceFromThreadublox(publox):
 
     pNMEAData = CreateNMEAData()
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(NMEADATA))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(NMEADATA))
     hApiParams = (1, "publox", 0),(1, "pNMEAData", 0),
     function_call = hApiProto(('GetNMEASentenceFromThreadubloxx', hDll), hApiParams)
     res = function_call(publox, pNMEAData)
@@ -765,119 +765,119 @@ def GetNMEASentenceFromThreadublox(publox):
 
 def StartNMEAThreadublox(publox):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "publox", 0),
     function_call = hApiProto(('StartNMEAThreadubloxx', hDll), hApiParams)
     return function_call(publox)
 
 def StopNMEAThreadublox(publox):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "publox", 0),
     function_call = hApiProto(('StopNMEAThreadubloxx', hDll), hApiParams)
     return function_call(publox)
 
 def CreateIM483I():
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_void_p)
     hApiParams = None
     function_call = hApiProto(('CreateIM483Ix', hDll), hApiParams)
     return function_call()
 
 def DestroyIM483I(pIM483I):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(None, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(None, ctypes.c_void_p)
     hApiParams = (1, "pIM483I", 0),
     function_call = hApiProto(('DestroyIM483Ix', hDll), hApiParams)
     function_call(pIM483I)
 
 def SetMotorTorqueIM483I(pIM483I, holdpercent, runpercent):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.c_int)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_int, ctypes.c_int)
     hApiParams = (1, "pIM483I", 0),(1, "holdpercent", 0),(1, "runpercent", 0),
     function_call = hApiProto(('SetMotorTorqueIM483Ix', hDll), hApiParams)
     return function_call(pIM483I, holdpercent, runpercent)
 
 def SetMotorSpeedIM483I(pIM483I, val):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_int)
     hApiParams = (1, "pIM483I", 0),(1, "val", 0),
     function_call = hApiProto(('SetMotorSpeedIM483Ix', hDll), hApiParams)
     return function_call(pIM483I, val)
 
 def SetMotorRelativeIM483I(pIM483I, val, bForce):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.c_int)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_int, ctypes.c_int)
     hApiParams = (1, "pIM483I", 0),(1, "val", 0),(1, "bForce", 0),
     function_call = hApiProto(('SetMotorSpeedIM483Ix', hDll), hApiParams)
     return function_call(pIM483I, val, bForce)
 
 def SetMotorOriginIM483I(pIM483I):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pIM483I", 0),
     function_call = hApiProto(('SetMotorOriginIM483Ix', hDll), hApiParams)
     return function_call(pIM483I)
 
 def SetMaxAngleIM483I(pIM483I, angle):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_double)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_double)
     hApiParams = (1, "pIM483I", 0),(1, "angle", 0),
     function_call = hApiProto(('SetMaxAngleIM483Ix', hDll), hApiParams)
     return function_call(pIM483I, angle)
 
 def CalibrateIM483I(pIM483I):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pIM483I", 0),
     function_call = hApiProto(('CalibrateIM483Ix', hDll), hApiParams)
     return function_call(pIM483I)
 
 def ConnectIM483I(pIM483I, cfgFilePath):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_char_p)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_char_p)
     hApiParams = (1, "pIM483I", 0),(1, "cfgFilePath", 0),
     function_call = hApiProto(('ConnectIM483Ix', hDll), hApiParams)
     return function_call(pIM483I, cfgFilePath.encode('UTF-8'))
 
 def DisconnectIM483I(pIM483I):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pIM483I", 0),
     function_call = hApiProto(('DisconnectIM483Ix', hDll), hApiParams)
     return function_call(pIM483I)
 
 def SetMaxAngleFromThreadIM483I(pIM483I, angle):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_double)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_double)
     hApiParams = (1, "pIM483I", 0),(1, "angle", 0),
     function_call = hApiProto(('SetMaxAngleFromThreadIM483Ix', hDll), hApiParams)
     return function_call(pIM483I, angle)
 
 def StartThreadIM483I(pIM483I):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pIM483I", 0),
     function_call = hApiProto(('StartThreadIM483Ix', hDll), hApiParams)
     return function_call(pIM483I)
 
 def StopThreadIM483I(pIM483I):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pIM483I", 0),
     function_call = hApiProto(('StopThreadIM483Ix', hDll), hApiParams)
     return function_call(pIM483I)
 
 def CreateSSC32():
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_void_p)
     hApiParams = None
     function_call = hApiProto(('CreateSSC32x', hDll), hApiParams)
     return function_call()
 
 def DestroySSC32(pSSC32):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(None, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(None, ctypes.c_void_p)
     hApiParams = (1, "pSSC32", 0),
     function_call = hApiProto(('DestroySSC32x', hDll), hApiParams)
     function_call(pSSC32)
@@ -887,7 +887,7 @@ def GetVoltageSSC32(pSSC32, channel):
 
     pvoltage = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.POINTER(ctypes.c_double))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_int, ctypes.POINTER(ctypes.c_double))
     hApiParams = (1, "pSSC32", 0),(1, "channel", 0),(1, "pvoltage", 0),
     function_call = hApiProto(('GetVoltageSSC32x', hDll), hApiParams)
     res = function_call(pSSC32, channel, pvoltage)
@@ -898,7 +898,7 @@ def GetDigitalInputSSC32(pSSC32, channel):
 
     pvalue = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.POINTER(ctypes.c_int))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_int, ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pSSC32", 0),(1, "channel", 0),(1, "pvalue", 0),
     function_call = hApiProto(('GetDigitalInputSSC32x', hDll), hApiParams)
     res = function_call(pSSC32, channel, pvalue)
@@ -909,7 +909,7 @@ def GetPWMSSC32(pSSC32, channel):
 
     ppw = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.POINTER(ctypes.c_int))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_int, ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pSSC32", 0),(1, "channel", 0),(1, "ppw", 0),
     function_call = hApiProto(('GetPWMSSC32x', hDll), hApiParams)
     res = function_call(pSSC32, channel, ppw)
@@ -917,7 +917,7 @@ def GetPWMSSC32(pSSC32, channel):
 
 def SetPWMSSC32(pSSC32, channel, pw):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.c_int)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_int, ctypes.c_int)
     hApiParams = (1, "pSSC32", 0),(1, "channel", 0),(1, "pw", 0),
     function_call = hApiProto(('SetPWMSSC32x', hDll), hApiParams)
     return function_call(pSSC32, channel, pw)
@@ -933,28 +933,28 @@ def SetAllPWMsSSC32(pSSC32, selectedchannels, pws):
     for k in range(nbchannels):
         ppws[k] = ctypes.c_int(pws[k])
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pSSC32", 0),(1, "pselectedchannels", 0),(1, "ppws", 0),
     function_call = hApiProto(('SetAllPWMsSSC32x', hDll), hApiParams)
     return function_call(pSSC32, pselectedchannels, ppws)
 
 def SetDigitalOutputSSC32(pSSC32, channel, value):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.c_int)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_int, ctypes.c_int)
     hApiParams = (1, "pSSC32", 0),(1, "channel", 0),(1, "value", 0),
     function_call = hApiProto(('SetDigitalOutputSSC32x', hDll), hApiParams)
     return function_call(pSSC32, channel, value)
 
 def ConnectSSC32(pSSC32, cfgFilePath):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_char_p)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_char_p)
     hApiParams = (1, "pSSC32", 0),(1, "cfgFilePath", 0),
     function_call = hApiProto(('ConnectSSC32x', hDll), hApiParams)
     return function_call(pSSC32, cfgFilePath.encode('UTF-8'))
 
 def DisconnectSSC32(pSSC32):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pSSC32", 0),
     function_call = hApiProto(('DisconnectSSC32x', hDll), hApiParams)
     return function_call(pSSC32)
@@ -970,35 +970,35 @@ def SetAllPWMsFromThreadSSC32(pSSC32, selectedchannels, pws):
     for k in range(nbchannels):
         ppws[k] = ctypes.c_int(pws[k])
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pSSC32", 0),(1, "pselectedchannels", 0),(1, "ppws", 0),
     function_call = hApiProto(('SetAllPWMsFromThreadSSC32x', hDll), hApiParams)
     return function_call(pSSC32, pselectedchannels, ppws)
 
 def StartThreadSSC32(pSSC32):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pSSC32", 0),
     function_call = hApiProto(('StartThreadSSC32x', hDll), hApiParams)
     return function_call(pSSC32)
 
 def StopThreadSSC32(pSSC32):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pSSC32", 0),
     function_call = hApiProto(('StopThreadSSC32x', hDll), hApiParams)
     return function_call(pSSC32)
 
 def CreatePololu():
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_void_p)
     hApiParams = None
     function_call = hApiProto(('CreatePololux', hDll), hApiParams)
     return function_call()
 
 def DestroyPololu(pPololu):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(None, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(None, ctypes.c_void_p)
     hApiParams = (1, "pPololu", 0),
     function_call = hApiProto(('DestroyPololux', hDll), hApiParams)
     function_call(pPololu)
@@ -1008,7 +1008,7 @@ def GetValuePololu(pPololu, channel):
 
     pvalue = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.POINTER(ctypes.c_int))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_int, ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pPololu", 0),(1, "channel", 0),(1, "pvalue", 0),
     function_call = hApiProto(('GetValuePololux', hDll), hApiParams)
     res = function_call(pPololu, channel, pvalue)
@@ -1025,14 +1025,14 @@ def GetAllValuesPololu(pPololu, selectedchannels, ais):
     for k in range(nbchannels):
         pais[k] = ctypes.c_int(ais[k])
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pPololu", 0),(1, "pselectedchannels", 0),(1, "pais", 0),
     function_call = hApiProto(('GetAllValuesPololux', hDll), hApiParams)
     return function_call(pPololu, pselectedchannels, pais)
 
 def SetPWMPololu(pPololu, channel, pw):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.c_int)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_int, ctypes.c_int)
     hApiParams = (1, "pPololu", 0),(1, "channel", 0),(1, "pw", 0),
     function_call = hApiProto(('SetPWMPololux', hDll), hApiParams)
     return function_call(pPololu, channel, pw)
@@ -1048,28 +1048,28 @@ def SetAllPWMsPololu(pPololu, selectedchannels, pws):
     for k in range(nbchannels):
         ppws[k] = ctypes.c_int(pws[k])
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pPololu", 0),(1, "pselectedchannels", 0),(1, "ppws", 0),
     function_call = hApiProto(('SetAllPWMsPololux', hDll), hApiParams)
     return function_call(pPololu, pselectedchannels, ppws)
 
 def SetPWMJrkPololu(pPololu, pw):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_int)
     hApiParams = (1, "pPololu", 0),(1, "pw", 0),
     function_call = hApiProto(('SetPWMJrkPololux', hDll), hApiParams)
     return function_call(pPololu, pw)
 
 def ConnectPololu(pPololu, cfgFilePath):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_char_p)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_char_p)
     hApiParams = (1, "pPololu", 0),(1, "cfgFilePath", 0),
     function_call = hApiProto(('ConnectPololux', hDll), hApiParams)
     return function_call(pPololu, cfgFilePath.encode('UTF-8'))
 
 def DisconnectPololu(pPololu):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pPololu", 0),
     function_call = hApiProto(('DisconnectPololux', hDll), hApiParams)
     return function_call(pPololu)
@@ -1079,7 +1079,7 @@ def GetValueFromThreadPololu(pPololu, channel):
 
     pvalue = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.POINTER(ctypes.c_int))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_int, ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pPololu", 0),(1, "channel", 0),(1, "pvalue", 0),
     function_call = hApiProto(('GetValueFromThreadPololux', hDll), hApiParams)
     res = function_call(pPololu, channel, pvalue)
@@ -1096,49 +1096,49 @@ def SetAllPWMsFromThreadPololu(pPololu, selectedchannels, pws):
     for k in range(nbchannels):
         ppws[k] = ctypes.c_int(pws[k])
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pPololu", 0),(1, "pselectedchannels", 0),(1, "ppws", 0),
     function_call = hApiProto(('SetAllPWMsFromThreadPololux', hDll), hApiParams)
     return function_call(pPololu, pselectedchannels, ppws)
 
 def StartThreadPololu(pPololu):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pPololu", 0),
     function_call = hApiProto(('StartThreadPololux', hDll), hApiParams)
     return function_call(pPololu)
 
 def StopThreadPololu(pPololu):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pPololu", 0),
     function_call = hApiProto(('StopThreadPololux', hDll), hApiParams)
     return function_call(pPololu)
 
 def CreateHokuyo():
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_void_p)
     hApiParams = None
     function_call = hApiProto(('CreateHokuyox', hDll), hApiParams)
     return function_call()
 
 def DestroyHokuyo(pHokuyo):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(None, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(None, ctypes.c_void_p)
     hApiParams = (1, "pHokuyo", 0),
     function_call = hApiProto(('DestroyHokuyox', hDll), hApiParams)
     function_call(pHokuyo)
 
 def k2angleHokuyo(pHokuyo, k):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_double, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_double, ctypes.c_void_p, ctypes.c_int)
     hApiParams = (1, "pHokuyo", 0),(1, "k", 0),
     function_call = hApiProto(('k2angleHokuyox', hDll), hApiParams)
     return function_call(pHokuyo, k)
 
 def angle2kHokuyo(pHokuyo, angle):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_double)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_double)
     hApiParams = (1, "pHokuyo", 0),(1, "angle", 0),
     function_call = hApiProto(('angle2kHokuyox', hDll), hApiParams)
     return function_call(pHokuyo, angle)
@@ -1150,7 +1150,7 @@ def GetLatestDataHokuyo(pHokuyo):
     pdistances = (ctypes.c_double*(n))() # Memory leak here, rely on garbage collector?
     pangles = (ctypes.c_double*(n))() # Memory leak here, rely on garbage collector?
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double))
     hApiParams = (1, "pHokuyo", 0),(1, "pdistances", 0),(1, "pangles", 0),
     function_call = hApiProto(('GetLatestDataHokuyox', hDll), hApiParams)
     res = function_call(pHokuyo, pdistances, pangles)
@@ -1158,14 +1158,14 @@ def GetLatestDataHokuyo(pHokuyo):
 
 def ConnectHokuyo(pHokuyo, cfgFilePath):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_char_p)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_char_p)
     hApiParams = (1, "pHokuyo", 0),(1, "cfgFilePath", 0),
     function_call = hApiProto(('ConnectHokuyox', hDll), hApiParams)
     return function_call(pHokuyo, cfgFilePath.encode('UTF-8'))
 
 def DisconnectHokuyo(pHokuyo):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pHokuyo", 0),
     function_call = hApiProto(('DisconnectHokuyox', hDll), hApiParams)
     return function_call(pHokuyo)
@@ -1177,7 +1177,7 @@ def GetLatestDataFromThreadHokuyo(pHokuyo):
     pdistances = (ctypes.c_double*(n))() # Memory leak here, rely on garbage collector?
     pangles = (ctypes.c_double*(n))() # Memory leak here, rely on garbage collector?
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double))
     hApiParams = (1, "pHokuyo", 0),(1, "pdistances", 0),(1, "pangles", 0),
     function_call = hApiProto(('GetLatestDataFromThreadHokuyox', hDll), hApiParams)
     res = function_call(pHokuyo, pdistances, pangles)
@@ -1185,56 +1185,56 @@ def GetLatestDataFromThreadHokuyo(pHokuyo):
 
 def StartThreadHokuyo(pHokuyo):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pHokuyo", 0),
     function_call = hApiProto(('StartThreadHokuyox', hDll), hApiParams)
     return function_call(pHokuyo)
 
 def StopThreadHokuyo(pHokuyo):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pHokuyo", 0),
     function_call = hApiProto(('StopThreadHokuyox', hDll), hApiParams)
     return function_call(pHokuyo)
 
 def CreateRPLIDAR():
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_void_p)
     hApiParams = None
     function_call = hApiProto(('CreateRPLIDARx', hDll), hApiParams)
     return function_call()
 
 def DestroyRPLIDAR(pRPLIDAR):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(None, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(None, ctypes.c_void_p)
     hApiParams = (1, "pRPLIDAR", 0),
     function_call = hApiProto(('DestroyRPLIDARx', hDll), hApiParams)
     function_call(pRPLIDAR)
 
 def StopRequestRPLIDAR(pRPLIDAR):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pRPLIDAR", 0),
     function_call = hApiProto(('StopRequestRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR)
 
 def ResetRequestRPLIDAR(pRPLIDAR):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pRPLIDAR", 0),
     function_call = hApiProto(('ResetRequestRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR)
 
 def GetStartupMessageRPLIDAR(pRPLIDAR):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pRPLIDAR", 0),
     function_call = hApiProto(('GetStartupMessageRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR)
 
 def ClearCacheRPLIDAR(pRPLIDAR):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pRPLIDAR", 0),
     function_call = hApiProto(('ClearCacheRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR)
@@ -1244,7 +1244,7 @@ def GetHealthRequestRPLIDAR(pRPLIDAR):
 
     pbProtectionStop = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pRPLIDAR", 0),(1, "pbProtectionStop", 0),
     function_call = hApiProto(('GetHealthRequestRPLIDARx', hDll), hApiParams)
     res = function_call(pRPLIDAR, pbProtectionStop)
@@ -1262,7 +1262,7 @@ def GetInfoRequestRPLIDAR(pRPLIDAR):
     #    SerialNumber[k] = ctypes.c_byte(int(0))
     SerialNumber = ctypes.create_string_buffer(33)
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int), ctypes.c_char_p)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int), ctypes.c_char_p)
     hApiParams = (1, "pRPLIDAR", 0),(1, "pModelID", 0),(1, "pHardwareVersion", 0),(1, "pFirmwareMajor", 0),(1, "pFirmwareMinor", 0),(1, "SerialNumber", 0),
     function_call = hApiProto(('GetInfoRequestRPLIDARx', hDll), hApiParams)
     res = function_call(pRPLIDAR, pModelID, pHardwareVersion, pFirmwareMajor, pFirmwareMinor, SerialNumber)
@@ -1273,7 +1273,7 @@ def GetTypicalScanModeRPLIDAR(pRPLIDAR):
 
     pScanModeID = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pRPLIDAR", 0),(1, "pScanModeID", 0),
     function_call = hApiProto(('GetTypicalScanModeRPLIDARx', hDll), hApiParams)
     res = function_call(pRPLIDAR, pScanModeID)
@@ -1290,7 +1290,7 @@ def GetAllSupportedScanModesRPLIDAR(pRPLIDAR):
     string_buffers = [ctypes.create_string_buffer(64) for i in range(16)]
     pScanModeNames = (ctypes.c_char_p*16)(*map(ctypes.addressof, string_buffers))
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_char_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_char_p))
     hApiParams = (1, "pRPLIDAR", 0),(1, "pScanModeIDs", 0),(1, "pScanModeusPerSamples", 0),(1, "pScanModeMaxDistances", 0),(1, "pScanModeAnsTypes", 0),(1, "pScanModeNames", 0),
     function_call = hApiProto(('GetAllSupportedScanModesRPLIDARx', hDll), hApiParams)
     res = function_call(pRPLIDAR, pScanModeIDs, pScanModeusPerSamples, pScanModeMaxDistances, pScanModeAnsTypes, pScanModeNames)
@@ -1298,42 +1298,42 @@ def GetAllSupportedScanModesRPLIDAR(pRPLIDAR):
 
 def SetMotorPWMRequestRPLIDAR(pRPLIDAR, pwm):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_int)
     hApiParams = (1, "pRPLIDAR", 0),(1, "pwm", 0),
     function_call = hApiProto(('SetMotorPWMRequestRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR, pwm)
 
 def SetLidarSpinSpeedRequestRPLIDAR(pRPLIDAR, rpm):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_int)
     hApiParams = (1, "pRPLIDAR", 0),(1, "rpm", 0),
     function_call = hApiProto(('SetLidarSpinSpeedRequestRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR, rpm)
 
 def StartMotorRPLIDAR(pRPLIDAR):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pRPLIDAR", 0),
     function_call = hApiProto(('StartMotorRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR)
 
 def StopMotorRPLIDAR(pRPLIDAR):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pRPLIDAR", 0),
     function_call = hApiProto(('StopMotorRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR)
 
 def StartScanRequestRPLIDAR(pRPLIDAR):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pRPLIDAR", 0),
     function_call = hApiProto(('StartScanRequestRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR)
 
 def StartForceScanRequestRPLIDAR(pRPLIDAR):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pRPLIDAR", 0),
     function_call = hApiProto(('StartForceScanRequestRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR)
@@ -1346,7 +1346,7 @@ def GetScanDataResponseRPLIDAR(pRPLIDAR):
     pbNewScan = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
     pQuality = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pRPLIDAR", 0),(1, "pdistance", 0),(1, "pangle", 0),(1, "pbNewScan", 0),(1, "pQuality", 0),
     function_call = hApiProto(('GetScanDataResponseRPLIDARx', hDll), hApiParams)
     res = function_call(pRPLIDAR, pdistance, pangle, pbNewScan, pQuality)
@@ -1354,7 +1354,7 @@ def GetScanDataResponseRPLIDAR(pRPLIDAR):
 
 def StartExpressScanRequestRPLIDAR(pRPLIDAR):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pRPLIDAR", 0),
     function_call = hApiProto(('StartExpressScanRequestRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR)
@@ -1367,7 +1367,7 @@ def GetExpressScanDataResponseRPLIDAR(pRPLIDAR):
     pangles = (ctypes.c_double*(n))() # Memory leak here, rely on garbage collector?
     pbNewScan = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pRPLIDAR", 0),(1, "pdistances", 0),(1, "pangles", 0),(1, "pbNewScan", 0),
     function_call = hApiProto(('GetExpressScanDataResponseRPLIDARx', hDll), hApiParams)
     res = function_call(pRPLIDAR, pdistances, pangles, pbNewScan)
@@ -1375,7 +1375,7 @@ def GetExpressScanDataResponseRPLIDAR(pRPLIDAR):
 
 def StartOtherScanRequestRPLIDAR(pRPLIDAR, scanmodeid):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_int)
     hApiParams = (1, "pRPLIDAR", 0),(1, "scanmodeid", 0),
     function_call = hApiProto(('StartOtherScanRequestRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR, scanmodeid)
@@ -1388,7 +1388,7 @@ def GetOtherScanDataResponseRPLIDAR(pRPLIDAR):
     pangles = (ctypes.c_double*(n))() # Memory leak here, rely on garbage collector?
     pbNewScan = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pRPLIDAR", 0),(1, "pdistances", 0),(1, "pangles", 0),(1, "pbNewScan", 0),
     function_call = hApiProto(('GetOtherScanDataResponseRPLIDARx', hDll), hApiParams)
     res = function_call(pRPLIDAR, pdistances, pangles, pbNewScan)
@@ -1396,14 +1396,14 @@ def GetOtherScanDataResponseRPLIDAR(pRPLIDAR):
 
 def ConnectRPLIDAR(pRPLIDAR, cfgFilePath):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.c_char_p)
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_char_p)
     hApiParams = (1, "pRPLIDAR", 0),(1, "cfgFilePath", 0),
     function_call = hApiProto(('ConnectRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR, cfgFilePath.encode('UTF-8'))
 
 def DisconnectRPLIDAR(pRPLIDAR):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pRPLIDAR", 0),
     function_call = hApiProto(('DisconnectRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR)
@@ -1416,7 +1416,7 @@ def GetScanDataResponseFromThreadRPLIDAR(pRPLIDAR):
     pbNewScan = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
     pQuality = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pRPLIDAR", 0),(1, "pdistance", 0),(1, "pangle", 0),(1, "pbNewScan", 0),(1, "pQuality", 0),
     function_call = hApiProto(('GetScanDataResponseFromThreadRPLIDARx', hDll), hApiParams)
     res = function_call(pRPLIDAR, pdistance, pangle, pbNewScan, pQuality)
@@ -1430,7 +1430,7 @@ def GetExpressScanDataResponseFromThreadRPLIDAR(pRPLIDAR):
     pangles = (ctypes.c_double*(n))() # Memory leak here, rely on garbage collector?
     pbNewScan = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int))
     hApiParams = (1, "pRPLIDAR", 0),(1, "pdistances", 0),(1, "pangles", 0),(1, "pbNewScan", 0),
     function_call = hApiProto(('GetExpressScanDataResponseFromThreadRPLIDARx', hDll), hApiParams)
     res = function_call(pRPLIDAR, pdistances, pangles, pbNewScan)
@@ -1438,42 +1438,42 @@ def GetExpressScanDataResponseFromThreadRPLIDAR(pRPLIDAR):
 
 def StartScanThreadRPLIDAR(pRPLIDAR):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pRPLIDAR", 0),
     function_call = hApiProto(('StartScanThreadRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR)
 
 def StopScanThreadRPLIDAR(pRPLIDAR):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pRPLIDAR", 0),
     function_call = hApiProto(('StopScanThreadRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR)
 
 def StartExpressScanThreadRPLIDAR(pRPLIDAR):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pRPLIDAR", 0),
     function_call = hApiProto(('StartExpressScanThreadRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR)
 
 def StopExpressScanThreadRPLIDAR(pRPLIDAR):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pRPLIDAR", 0),
     function_call = hApiProto(('StopExpressScanThreadRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR)
 
 def StartOtherScanThreadRPLIDAR(pRPLIDAR):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pRPLIDAR", 0),
     function_call = hApiProto(('StartOtherScanThreadRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR)
 
 def StopOtherScanThreadRPLIDAR(pRPLIDAR):
     global hDll
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
     hApiParams = (1, "pRPLIDAR", 0),
     function_call = hApiProto(('StopOtherScanThreadRPLIDARx', hDll), hApiParams)
     return function_call(pRPLIDAR)
