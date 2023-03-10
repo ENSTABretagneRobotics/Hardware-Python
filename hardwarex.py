@@ -127,18 +127,13 @@ def DestroySBG(pSBG):
 def GetLatestDataSBG(pSBG):
     global hDll
 
-    pSBGData = CreateSBGData()
+    pSBGData = (SBGDATA*(1))() # Memory leak here, rely on garbage collector?
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(SBGDATA))
     hApiParams = (1, "pSBG", 0),(1, "pSBGData", 0),
     function_call = hApiProto(('GetLatestDataSBGx', hDll), hApiParams)
     res = function_call(pSBG, pSBGData)
-    
-    sbgdata = pSBGData[0]
-
-    DestroySBGData(pSBGData)
-
-    return res, sbgdata
+    return res, pSBGData[0]
 
 def ConnectSBG(pSBG, cfgFilePath):
     global hDll
@@ -157,18 +152,13 @@ def DisconnectSBG(pSBG):
 def GetLatestDataFromThreadSBG(pSBG):
     global hDll
 
-    pSBGData = CreateSBGData()
+    pSBGData = (SBGDATA*(1))() # Memory leak here, rely on garbage collector?
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(SBGDATA))
     hApiParams = (1, "pSBG", 0),(1, "pSBGData", 0),
     function_call = hApiProto(('GetLatestDataFromThreadSBGx', hDll), hApiParams)
     res = function_call(pSBG, pSBGData)
-    
-    sbgdata = pSBGData[0]
-
-    DestroySBGData(pSBGData)
-
-    return res, sbgdata
+    return res, pSBGData[0]
 
 def StartThreadSBG(pSBG):
     global hDll
@@ -243,18 +233,13 @@ def DestroyMT(pMT):
 def GetLatestDataMT(pMT):
     global hDll
 
-    pMTData = CreateMTData()
+    pMTData = (MTDATA*(1))() # Memory leak here, rely on garbage collector?
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(MTDATA))
     hApiParams = (1, "pMT", 0),(1, "pMTData", 0),
     function_call = hApiProto(('GetLatestDataMTx', hDll), hApiParams)
     res = function_call(pMT, pMTData)
-    
-    mtdata = pMTData[0]
-
-    DestroyMTData(pMTData)
-
-    return res, mtdata
+    return res, pMTData[0]
 
 def ConnectMT(pMT, cfgFilePath):
     global hDll
@@ -273,18 +258,13 @@ def DisconnectMT(pMT):
 def GetLatestDataFromThreadMT(pMT):
     global hDll
 
-    pMTData = CreateMTData()
+    pMTData = (MTDATA*(1))() # Memory leak here, rely on garbage collector?
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(MTDATA))
     hApiParams = (1, "pMT", 0),(1, "pMTData", 0),
     function_call = hApiProto(('GetLatestDataFromThreadMTx', hDll), hApiParams)
     res = function_call(pMT, pMTData)
-    
-    mtdata = pMTData[0]
-
-    DestroyMTData(pMTData)
-
-    return res, mtdata
+    return res, pMTData[0]
 
 def StartThreadMT(pMT):
     global hDll
@@ -337,18 +317,13 @@ def DestroyRazorAHRS(pRazorAHRS):
 def GetLatestDataRazorAHRS(pRazorAHRS):
     global hDll
 
-    pRazorAHRSData = CreateRazorAHRSData()
+    pRazorAHRSData = (RAZORAHRSDATA*(1))() # Memory leak here, rely on garbage collector?
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(RAZORAHRSDATA))
     hApiParams = (1, "pRazorAHRS", 0),(1, "pRazorAHRSData", 0),
     function_call = hApiProto(('GetLatestDataRazorAHRSx', hDll), hApiParams)
     res = function_call(pRazorAHRS, pRazorAHRSData)
-    
-    razorahrsdata = pRazorAHRSData[0]
-
-    DestroyRazorAHRSData(pRazorAHRSData)
-
-    return res, razorahrsdata
+    return res, pRazorAHRSData[0]
 
 def ConnectRazorAHRS(pRazorAHRS, cfgFilePath):
     global hDll
@@ -367,18 +342,13 @@ def DisconnectRazorAHRS(pRazorAHRS):
 def GetLatestDataFromThreadRazorAHRS(pRazorAHRS):
     global hDll
 
-    pRazorAHRSData = CreateRazorAHRSData()
+    pRazorAHRSData = (RAZORAHRSDATA*(1))() # Memory leak here, rely on garbage collector?
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(RAZORAHRSDATA))
     hApiParams = (1, "pRazorAHRS", 0),(1, "pRazorAHRSData", 0),
     function_call = hApiProto(('GetLatestDataFromThreadRazorAHRSx', hDll), hApiParams)
     res = function_call(pRazorAHRS, pRazorAHRSData)
-    
-    razorahrsdata = pRazorAHRSData[0]
-
-    DestroyRazorAHRSData(pRazorAHRSData)
-
-    return res, razorahrsdata
+    return res, pRazorAHRSData[0]
 
 def StartThreadRazorAHRS(pRazorAHRS):
     global hDll
@@ -646,18 +616,13 @@ def DestroyNMEADevice(pNMEADevice):
 def GetLatestDataNMEADevice(pNMEADevice):
     global hDll
 
-    pNMEAData = CreateNMEAData()
+    pNMEAData = (NMEADATA*(1))() # Memory leak here, rely on garbage collector?
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(NMEADATA))
     hApiParams = (1, "pNMEADevice", 0),(1, "pNMEAData", 0),
     function_call = hApiProto(('GetLatestDataNMEADevicex', hDll), hApiParams)
     res = function_call(pNMEADevice, pNMEAData)
-
-    nmeadata = pNMEAData[0]
-
-    DestroyNMEAData(pNMEAData)
-
-    return res, nmeadata
+    return res, pNMEAData[0]
 
 def ConnectNMEADevice(pNMEADevice, cfgFilePath):
     global hDll
@@ -676,18 +641,13 @@ def DisconnectNMEADevice(pNMEADevice):
 def GetLatestDataFromThreadNMEADevice(pNMEADevice):
     global hDll
 
-    pNMEAData = CreateNMEAData()
+    pNMEAData = (NMEADATA*(1))() # Memory leak here, rely on garbage collector?
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(NMEADATA))
     hApiParams = (1, "pNMEADevice", 0),(1, "pNMEAData", 0),
     function_call = hApiProto(('GetLatestDataFromThreadNMEADevicex', hDll), hApiParams)
     res = function_call(pNMEADevice, pNMEAData)
-
-    nmeadata = pNMEAData[0]
-
-    DestroyNMEAData(pNMEAData)
-
-    return res, nmeadata
+    return res, pNMEAData[0]
 
 def StartThreadNMEADevice(pNMEADevice):
     global hDll
@@ -702,6 +662,10 @@ def StopThreadNMEADevice(pNMEADevice):
     hApiParams = (1, "pNMEADevice", 0),
     function_call = hApiProto(('StopThreadNMEADevicex', hDll), hApiParams)
     return function_call(pNMEADevice)
+
+#class UBXDATA(ctypes.Structure):
+#    _pack_ = 1
+#    _fields_ = ...
 
 def Createublox():
     global hDll
@@ -720,18 +684,13 @@ def Destroyublox(publox):
 def GetNMEASentenceublox(publox):
     global hDll
 
-    pNMEAData = CreateNMEAData()
+    pNMEAData = (NMEADATA*(1))() # Memory leak here, rely on garbage collector?
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(NMEADATA))
     hApiParams = (1, "publox", 0),(1, "pNMEAData", 0),
     function_call = hApiProto(('GetNMEASentenceubloxx', hDll), hApiParams)
     res = function_call(publox, pNMEAData)
-
-    nmeadata = pNMEAData[0]
-
-    DestroyNMEAData(pNMEAData)
-
-    return res, nmeadata
+    return res, pNMEAData[0]
 
 def Connectublox(publox, cfgFilePath):
     global hDll
@@ -750,18 +709,13 @@ def Disconnectublox(publox):
 def GetNMEASentenceFromThreadublox(publox):
     global hDll
 
-    pNMEAData = CreateNMEAData()
+    pNMEAData = (NMEADATA*(1))() # Memory leak here, rely on garbage collector?
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(NMEADATA))
     hApiParams = (1, "publox", 0),(1, "pNMEAData", 0),
     function_call = hApiProto(('GetNMEASentenceFromThreadubloxx', hDll), hApiParams)
     res = function_call(publox, pNMEAData)
-
-    nmeadata = pNMEAData[0]
-
-    DestroyNMEAData(pNMEAData)
-
-    return res, nmeadata
+    return res, pNMEAData[0]
 
 def StartNMEAThreadublox(publox):
     global hDll
