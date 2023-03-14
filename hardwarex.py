@@ -447,24 +447,24 @@ def DestroyP33x(pP33x):
 def GetPressureP33x(pP33x):
     global hDll
     
-    ppressure = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
+    pPressure = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_double))
-    hApiParams = (1, "pP33x", 0),(1, "ppressure", 0),
+    hApiParams = (1, "pP33x", 0),(1, "pPressure", 0),
     function_call = hApiProto(('GetPressureP33xx', hDll), hApiParams)
-    res = function_call(pP33x, ppressure)
-    return res, ppressure[0]
+    res = function_call(pP33x, pPressure)
+    return res, pPressure[0]
 
 def GetTemperatureP33x(pP33x):
     global hDll
     
-    ptemperature = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
+    pTemperature = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_double))
-    hApiParams = (1, "pP33x", 0),(1, "ptemperature", 0),
+    hApiParams = (1, "pP33x", 0),(1, "pTemperature", 0),
     function_call = hApiProto(('GetTemperatureP33xx', hDll), hApiParams)
-    res = function_call(pP33x, ptemperature)
-    return res, ptemperature[0]
+    res = function_call(pP33x, pTemperature)
+    return res, pTemperature[0]
 
 def ConnectP33x(pP33x, cfgFilePath):
     global hDll
@@ -483,24 +483,24 @@ def DisconnectP33x(pP33x):
 def GetPressureFromThreadP33x(pP33x):
     global hDll
     
-    ppressure = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
+    pPressure = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_double))
-    hApiParams = (1, "pP33x", 0),(1, "ppressure", 0),
+    hApiParams = (1, "pP33x", 0),(1, "pPressure", 0),
     function_call = hApiProto(('GetPressureFromThreadP33xx', hDll), hApiParams)
-    res = function_call(pP33x, ppressure)
-    return res, ppressure[0]
+    res = function_call(pP33x, pPressure)
+    return res, pPressure[0]
 
 def GetTemperatureFromThreadP33x(pP33x):
     global hDll
     
-    ptemperature = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
+    pTemperature = (ctypes.c_double*(1))() # Memory leak here, rely on garbage collector?
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_double))
-    hApiParams = (1, "pP33x", 0),(1, "ptemperature", 0),
+    hApiParams = (1, "pP33x", 0),(1, "pTemperature", 0),
     function_call = hApiProto(('GetTemperatureFromThreadP33xx', hDll), hApiParams)
-    res = function_call(pP33x, ptemperature)
-    return res, ptemperature[0]
+    res = function_call(pP33x, pTemperature)
+    return res, pTemperature[0]
 
 def StartThreadP33x(pP33x):
     global hDll
@@ -850,13 +850,13 @@ def GetVoltageSSC32(pSSC32, channel):
 def GetDigitalInputSSC32(pSSC32, channel):
     global hDll
 
-    pvalue = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
+    pValue = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_int, ctypes.POINTER(ctypes.c_int))
-    hApiParams = (1, "pSSC32", 0),(1, "channel", 0),(1, "pvalue", 0),
+    hApiParams = (1, "pSSC32", 0),(1, "channel", 0),(1, "pValue", 0),
     function_call = hApiProto(('GetDigitalInputSSC32x', hDll), hApiParams)
-    res = function_call(pSSC32, channel, pvalue)
-    return res, pvalue[0]
+    res = function_call(pSSC32, channel, pValue)
+    return res, pValue[0]
 
 def GetPWMSSC32(pSSC32, channel):
     global hDll
@@ -960,13 +960,13 @@ def DestroyPololu(pPololu):
 def GetValuePololu(pPololu, channel):
     global hDll
 
-    pvalue = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
+    pValue = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_int, ctypes.POINTER(ctypes.c_int))
-    hApiParams = (1, "pPololu", 0),(1, "channel", 0),(1, "pvalue", 0),
+    hApiParams = (1, "pPololu", 0),(1, "channel", 0),(1, "pValue", 0),
     function_call = hApiProto(('GetValuePololux', hDll), hApiParams)
-    res = function_call(pPololu, channel, pvalue)
-    return res, pvalue[0]
+    res = function_call(pPololu, channel, pValue)
+    return res, pValue[0]
 
 def GetAllValuesPololu(pPololu, selectedchannels, ais):
     global hDll
@@ -1031,13 +1031,13 @@ def DisconnectPololu(pPololu):
 def GetValueFromThreadPololu(pPololu, channel):
     global hDll
 
-    pvalue = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
+    pValue = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
 
     hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_int, ctypes.POINTER(ctypes.c_int))
-    hApiParams = (1, "pPololu", 0),(1, "channel", 0),(1, "pvalue", 0),
+    hApiParams = (1, "pPololu", 0),(1, "channel", 0),(1, "pValue", 0),
     function_call = hApiProto(('GetValueFromThreadPololux', hDll), hApiParams)
-    res = function_call(pPololu, channel, pvalue)
-    return res, pvalue[0]
+    res = function_call(pPololu, channel, pValue)
+    return res, pValue[0]
 
 def SetAllPWMsFromThreadPololu(pPololu, selectedchannels, pws):
     global hDll
