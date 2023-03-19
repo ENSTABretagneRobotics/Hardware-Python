@@ -1337,16 +1337,18 @@ def StartOtherScanRequestRPLIDAR(pRPLIDAR, scanmodeid):
 def GetOtherScanDataResponseRPLIDAR(pRPLIDAR):
     global hDll
 
-    n = 32
+    n = 8192
     pdistances = (ctypes.c_double*(n))() # Memory leak here, rely on garbage collector?
     pangles = (ctypes.c_double*(n))() # Memory leak here, rely on garbage collector?
     pbNewScan = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
+    pNbMeasurements = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
+    pNbMeasurements[0] = 96
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int))
-    hApiParams = (1, "pRPLIDAR", 0),(1, "pdistances", 0),(1, "pangles", 0),(1, "pbNewScan", 0),
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
+    hApiParams = (1, "pRPLIDAR", 0),(1, "pdistances", 0),(1, "pangles", 0),(1, "pbNewScan", 0),(1, "pNbMeasurements", 0),
     function_call = hApiProto(('GetOtherScanDataResponseRPLIDARx', hDll), hApiParams)
-    res = function_call(pRPLIDAR, pdistances, pangles, pbNewScan)
-    return res, pdistances, pangles, pbNewScan[0]
+    res = function_call(pRPLIDAR, pdistances, pangles, pbNewScan, pNbMeasurements)
+    return res, pdistances, pangles, pbNewScan[0], pNbMeasurements[0]
 
 def ConnectRPLIDAR(pRPLIDAR, cfgFilePath):
     global hDll
@@ -1389,6 +1391,37 @@ def GetExpressScanDataResponseFromThreadRPLIDAR(pRPLIDAR):
     function_call = hApiProto(('GetExpressScanDataResponseFromThreadRPLIDARx', hDll), hApiParams)
     res = function_call(pRPLIDAR, pdistances, pangles, pbNewScan)
     return res, pdistances, pangles, pbNewScan[0]
+
+def GetOtherScanDataResponseFromThreadRPLIDAR(pRPLIDAR):
+    global hDll
+
+    n = 8192
+    pdistances = (ctypes.c_double*(n))() # Memory leak here, rely on garbage collector?
+    pangles = (ctypes.c_double*(n))() # Memory leak here, rely on garbage collector?
+    pbNewScan = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
+    pNbMeasurements = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
+    pNbMeasurements[0] = 96
+
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))
+    hApiParams = (1, "pRPLIDAR", 0),(1, "pdistances", 0),(1, "pangles", 0),(1, "pbNewScan", 0),(1, "pNbMeasurements", 0),
+    function_call = hApiProto(('GetOtherScanDataResponseFromThreadRPLIDARx', hDll), hApiParams)
+    res = function_call(pRPLIDAR, pdistances, pangles, pbNewScan, pNbMeasurements)
+    return res, pdistances, pangles, pbNewScan[0], pNbMeasurements[0]
+
+def GetLast360DataFromThreadRPLIDAR(pRPLIDAR):
+    global hDll
+
+    n = 8192
+    pdistances = (ctypes.c_double*(n))() # Memory leak here, rely on garbage collector?
+    pangles = (ctypes.c_double*(n))() # Memory leak here, rely on garbage collector?
+    pNbMeasurements = (ctypes.c_int*(1))() # Memory leak here, rely on garbage collector?
+    pNbMeasurements[0] = 0
+
+    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_int))
+    hApiParams = (1, "pRPLIDAR", 0),(1, "pdistances", 0),(1, "pangles", 0),(1, "pNbMeasurements", 0),
+    function_call = hApiProto(('GetLast360DataFromThreadRPLIDARx', hDll), hApiParams)
+    res = function_call(pRPLIDAR, pdistances, pangles, pNbMeasurements)
+    return res, pdistances, pangles, pNbMeasurements[0]
 
 def StartScanThreadRPLIDAR(pRPLIDAR):
     global hDll
